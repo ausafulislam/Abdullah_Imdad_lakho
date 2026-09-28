@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1400" viewBox="0 0 1200 1400">
+  <defs>
+    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#f6f1e7" opacity="0.07"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#7c8b6f" stop-opacity="0.30"/>
+      <stop offset="60%" stop-color="#7c8b6f" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#7c8b6f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="1400" fill="#14120f"/>
+  <rect width="1200" height="1400" fill="url(#dots)"/>
+  <rect width="1200" height="1400" fill="url(#glow)"/>
+  <g fill="none" stroke="#f6f1e7" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round">
+    <circle cx="600" cy="430" r="52"/>
+    <line x1="600" y1="482" x2="600" y2="536"/>
+    <path d="M600 540 L700 640 L600 740 L500 640 Z" fill="#24211c"/>
+    <path d="M500 640 H400 Q380 640 380 660 V776"/>
+    <path d="M700 640 H800 Q820 640 820 660 V776"/>
+    <path d="M380 890 V930 H820 V890"/>
+    <line x1="600" y1="930" x2="600" y2="978"/>
+  </g>
+  <g>
+    <rect x="270" y="780" width="220" height="110" rx="24" fill="#24211c" stroke="#f6f1e7" stroke-opacity="0.5" stroke-width="3"/>
+    <rect x="302" y="814" width="156" height="16" rx="8" fill="#f6f1e7" fill-opacity="0.45"/>
+    <rect x="302" y="842" width="104" height="16" rx="8" fill="#f6f1e7" fill-opacity="0.26"/>
+    <rect x="710" y="780" width="220" height="110" rx="24" fill="#24211c" stroke="#f6f1e7" stroke-opacity="0.5" stroke-width="3"/>
+    <rect x="742" y="814" width="156" height="16" rx="8" fill="#f6f1e7" fill-opacity="0.45"/>
+    <rect x="742" y="842" width="104" height="16" rx="8" fill="#f6f1e7" fill-opacity="0.26"/>
+  </g>
+  <path d="M600 978 V1030 Q600 1060 570 1060 H300 Q260 1060 260 1020 V700 Q260 664 300 664 H470" fill="none" stroke="#ff5a3c" stroke-width="5" stroke-linecap="round"/>
+  <path d="M462 640 L500 664 L462 688 Z" fill="#ff5a3c"/>
+  <circle cx="600" cy="430" r="15" fill="#ff5a3c"/>
+  <g>
+    <rect x="486" y="1120" width="228" height="72" rx="36" fill="#24211c" stroke="#ff5a3c" stroke-opacity="0.8" stroke-width="3"/>
+    <rect x="536" y="1148" width="128" height="16" rx="8" fill="#ff5a3c" fill-opacity="0.8"/>
+  </g>
+  <g fill="#f6f1e7" fill-opacity="0.35">
+    <rect x="424" y="640" width="34" height="8" rx="4"/>
+    <rect x="742" y="640" width="34" height="8" rx="4"/>
+  </g>
+  <g fill="#d9a441">
+    <circle cx="380" cy="930" r="9"/>
+    <circle cx="820" cy="930" r="9"/>
+    <circle cx="600" cy="978" r="9"/>
+  </g>
+</svg>
