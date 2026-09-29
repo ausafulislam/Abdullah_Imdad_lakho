@@ -47,9 +47,19 @@ export default function Footer() {
         </div>
 
         <div className="mx-auto mt-6 max-w-7xl border-t border-ink/10 px-5 pt-6 sm:px-6 md:px-10">
-          <p className="text-center text-xs text-ink/40 md:text-left">
-            © {new Date().getFullYear()} Abdullah Imdad. Built with care in Karachi, Pakistan.
-          </p>
+          <div className="flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
+            <p className="text-xs text-ink/40">
+              © {new Date().getFullYear()} Abdullah Imdad. Built with care in Karachi, Pakistan.
+            </p>
+            <a
+              href="https://ausafulislam.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-ink/40 transition-colors hover:text-coral"
+            >
+              Built by <span className="font-medium">Ausaf</span>
+            </a>
+          </div>
         </div>
       </footer>
 

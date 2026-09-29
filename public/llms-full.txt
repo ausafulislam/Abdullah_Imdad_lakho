@@ -112,8 +112,9 @@ He has not held a job, internship or freelance engagement.
 - **LinkedIn:** https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/
 - **Website:** https://abdullah-imdad-lakho.vercel.app/
 - **Enquiry form:** https://abdullah-imdad-lakho.vercel.app/#contact
+- **WhatsApp (for enquiries):** https://wa.me/923033313312
 
-The contact form on the website is a front-end interface only. It does not currently transmit submissions to any server.
+The contact form on the website has no backend. Submitting it composes a message from the fields the visitor typed and opens WhatsApp (`wa.me`) in a new tab; the visitor presses send there. The site itself transmits, stores and emails nothing, so no message is delivered unless the visitor completes the step in WhatsApp. Copy-to-clipboard and `mailto:` fallbacks are offered for people without WhatsApp.
 
 ## Accuracy Notes
 

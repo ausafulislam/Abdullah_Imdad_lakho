@@ -155,6 +155,7 @@ npm run preview
 ├── tsconfig.json           # strict mode, "@/*" -> "src/*" path alias
 ├── public/                 # copied verbatim into dist/ — not processed by Vite
 │   ├── favicon.svg
+│   ├── 404.html            # self-contained 404 page (no JS, no external CSS)
 │   ├── robots.txt
 │   ├── sitemap.xml
 │   ├── llms.txt            # AI-assistant overview
@@ -183,8 +184,9 @@ npm run preview
         ├── Work.tsx          # filterable "Areas of Interest" grid
         ├── Process.tsx       # numbered learning-cycle steps
         ├── Testimonials.tsx  # achievements carousel
-        ├── Contact.tsx       # contact details, socials, form
-        └── Footer.tsx        # nav, copyright
+        ├── Contact.tsx       # contact details, socials, WhatsApp form handoff
+        ├── ErrorBoundary.tsx # render-error fallback page
+        └── Footer.tsx        # nav, copyright, builder credit
 ```
 
 Anything in `public/` is served from the site root: `public/images/avatar.jpeg` becomes
@@ -453,10 +455,11 @@ Utility classes worth knowing: `t-hero`, `t-h2`, `t-h3`, `t-body`, `t-lead`, `t-
 - Reveal animations respect `prefers-reduced-motion` — do not add motion that bypasses it.
 - Form inputs use `<label htmlFor>` with native `required` and `type="email"` validation.
 
-> **The contact form has no backend.** Submitting sets local React state and shows a success
-> message — nothing is sent, stored or emailed. Connect a form service (Formspree, Basin, a
-> serverless function) before relying on it, and do not imply a message was delivered until it
-> genuinely is. The same caveat is stated in `llms.txt`.
+> **The contact form hands off to WhatsApp — it does not submit to a server.** Submitting composes
+> the message and opens `wa.me` in a new tab; the visitor presses send there. Nothing is stored,
+> emailed, or transmitted by this site. The confirmation panel offers copy and `mailto:` fallbacks
+> for when the tab is blocked or WhatsApp is not installed, and it never claims the message was
+> delivered. The same caveat is stated in `llms.txt` and `llms-full.txt`.
 
 ---
 
@@ -520,9 +523,10 @@ npm audit
 - Keep the dev server on `localhost`. Do not pass `--host` on an untrusted network.
 - All 166 locked packages resolve from `registry.npmjs.org` with sha512 integrity. Use `npm ci` in
   CI to install exactly the locked tree.
-- The site makes **no** network calls except the Google Fonts stylesheet — no analytics, no
-  tracking, no cookies, no third-party scripts.
-- The contact form posts nowhere.
+- The site loads **no** third-party resources except the Google Fonts stylesheet — no analytics, no
+  tracking, no cookies, no third-party scripts, no CDN.
+- The contact form posts nowhere. It only builds a `wa.me` link from values already typed by the
+  visitor and hands off to WhatsApp in a new tab; that navigation is user-initiated.
 - Content contains no hidden text, zero-width characters, bidi overrides or prompt-injection
   strings; all 18 source files were audited for Trojan Source and XSS vectors.
 
@@ -585,12 +589,24 @@ deploying.
 No. It is an experimental proposal that no search engine uses for ranking. It helps AI assistants
 describe the owner accurately, which is a different goal.
 
-**The contact form says "sent" but nothing arrives. Why?**
-There is no backend. The form only updates local React state. Wire it to a form service first.
+**What does the contact form actually do?**
+There is no backend. Submitting composes your message and opens WhatsApp in a new tab, where you
+press send — the site transmits nothing itself. If the tab is blocked, the panel offers a manual
+WhatsApp link, copy-to-clipboard, and a `mailto:` fallback. To use a real form service instead,
+replace `handleSubmit` in `Contact.tsx`.
 
 ---
 
 ## Changelog
+
+### 1.2.0 — WhatsApp contact, error handling and 404
+
+- Contact form now composes the enquiry and opens `wa.me` in a new tab; nothing is submitted server-side
+- Added confirmation panel with manual WhatsApp link, copy-to-clipboard, `mailto:` fallback and edit-reset
+- Added `ErrorBoundary` around the app so a render crash shows a styled recovery page instead of a blank screen
+- Added a self-contained `public/404.html`; Vercel serves it with a real 404 status
+- Added a "Built by Ausaf" credit to the footer
+- Updated README and both `llms` files to describe the new contact flow accurately
 
 ### 1.1.0 — AI discoverability and documentation
 

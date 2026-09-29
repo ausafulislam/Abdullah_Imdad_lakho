@@ -7,7 +7,7 @@
 - [Full Portfolio](https://abdullah-imdad-lakho.vercel.app/): Single-page site covering education, skills, areas of interest, learning approach, academic achievements and contact details.
 - [Overview](https://abdullah-imdad-lakho.vercel.app/#top): Degree, university, current study stage, availability for internships and collaboration, and headline statistics.
 - [About](https://abdullah-imdad-lakho.vercel.app/#about): Biography, education facts, statement of technical interests, and communication and collaboration strengths.
-- [Contact](https://abdullah-imdad-lakho.vercel.app/#contact): Email address, phone number, Karachi location, LinkedIn profile, and an enquiry form.
+- [Contact](https://abdullah-imdad-lakho.vercel.app/#contact): Email address, phone number, Karachi location, LinkedIn profile, and an enquiry form that hands off to WhatsApp.
 - [LinkedIn Profile](https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/): Professional profile using the full name form "Abdullah Imdad Lakho", and the most detailed external account of his education and background.
 
 ## Skills
@@ -45,6 +45,7 @@
 - Email: abdullah17.imdad@gmail.com
 - Phone: +92-303-3313312
 - LinkedIn: https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/
+- WhatsApp: https://wa.me/923033313312
 - Location: Karachi, Sindh, Pakistan
 
 ## Optional
