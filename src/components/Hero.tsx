@@ -83,7 +83,8 @@ export default function Hero() {
             </h1>
 
             <p className="t-lead mt-5 max-w-md text-ink/65 sm:mt-6">
-              I&apos;m Abdullah — a BS Artificial Intelligence student in my first
+              I&apos;m Abdullah Imdad (Lakho) — a BS Artificial Intelligence
+              student in my first
               semester at DUET, Karachi. I&apos;m at the beginning of my journey,
               focused on getting the fundamentals of programming, AI and
               analytical thinking right.
@@ -130,6 +131,8 @@ export default function Hero() {
                   width={1145}
                   height={1374}
                   loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   className="aspect-[5/6] w-full object-cover"
                 />
                 <div

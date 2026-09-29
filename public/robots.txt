@@ -1,0 +1,13 @@
+# robots.txt — abdullah-imdad-lakho.vercel.app
+# Personal portfolio of Abdullah Imdad (Abdullah Imdad Lakho)
+# Everything here is public and intended to be indexed.
+
+User-agent: *
+Allow: /
+
+# No admin, API or private areas exist in this static build, so there is
+# nothing to disallow. Keep it that way: do not add a Disallow rule that
+# would block /images/ or /assets/, or social-preview crawlers will lose
+# the Open Graph image and the build output will stop rendering correctly.
+
+Sitemap: https://abdullah-imdad-lakho.vercel.app/sitemap.xml

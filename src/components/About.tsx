@@ -12,10 +12,10 @@ export default function About() {
 
           <div className="mt-8 overflow-hidden rounded-2xl ring-1 ring-ink/10">
             <img
-              src="/images/avatar.jpg"
+              src="/images/avatar.jpeg"
               alt="Portrait of Abdullah Imdad"
-              width={1200}
-              height={1600}
+              width={1147}
+              height={1530}
               loading="lazy"
               className="aspect-[4/3] w-full object-cover sm:aspect-square lg:aspect-[4/3]"
             />
@@ -24,7 +24,7 @@ export default function About() {
 
         <div className="reveal lg:col-span-8" style={{ transitionDelay: "120ms" }}>
           <p className="t-lead max-w-2xl text-ink/70">
-            I&apos;m Abdullah Imdad, a BS Artificial Intelligence student at
+            I&apos;m Abdullah Imdad Lakho, a BS Artificial Intelligence student at
             Dawood University of Engineering and Technology (DUET), Karachi. I&apos;m
             at the beginning of my journey in technology, focused on developing a
             strong foundation in programming, artificial intelligence,
