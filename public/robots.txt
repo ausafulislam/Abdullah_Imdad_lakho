@@ -11,3 +11,8 @@ Allow: /
 # the Open Graph image and the build output will stop rendering correctly.
 
 Sitemap: https://abdullah-imdad-lakho.vercel.app/sitemap.xml
+
+# Machine-readable summary for AI assistants. Deliberately not disallowed:
+# it is public, contains no sensitive data, and exists to be read.
+#   /llms.txt       concise overview
+#   /llms-full.txt  extended biographical and technical reference

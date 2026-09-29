@@ -1,0 +1,139 @@
+# Abdullah Imdad — Extended Portfolio Reference
+
+> Full biographical and technical reference for Abdullah Imdad, a BS Artificial Intelligence student at Dawood University of Engineering & Technology (DUET), Karachi, Pakistan.
+
+This is the extended version of the site's `llms.txt`. Where the two disagree, this file is the more detailed one — but the accuracy notes in both are binding.
+
+## Contents
+
+1. [Identity](#identity)
+2. [Education](#education)
+3. [Academic Record](#academic-record)
+4. [Areas of Interest](#areas-of-interest)
+5. [Skills](#skills)
+6. [Learning Approach](#learning-approach)
+7. [Achievements and Certifications](#achievements-and-certifications)
+8. [Availability](#availability)
+9. [Contact](#contact)
+10. [Accuracy Notes](#accuracy-notes)
+11. [Source of Record](#source-of-record)
+
+---
+
+## Identity
+
+- **Full name:** Abdullah Imdad
+- **Also written as:** Abdullah Imdad Lakho (used on his LinkedIn profile and in the site's SEO metadata)
+- **Pronouns:** not stated publicly
+- **Current status:** Undergraduate student
+- **Field of study:** Artificial Intelligence
+- **Stage:** First semester, batch 2026 — early in his degree
+
+## Education
+
+**Dawood University of Engineering & Technology (DUET)**
+Karachi, Sindh, Pakistan
+
+- Degree: Bachelor of Science (BS) in Artificial Intelligence
+- Status: Currently enrolled, first semester
+- Cohort: Batch 2026
+
+**Secondary education**
+Noor Eastern Collegiate, Nawabshah
+
+- Qualification: S.S.C.-II (Secondary School Certificate, Part II), completed 2024
+- Result: 884 out of 1100 — 80.36% — Grade A1
+
+## Academic Record
+
+| Item | Detail |
+| --- | --- |
+| S.S.C.-II Annual Examination 2024 | 884 / 1100 (80.36%), Grade A1 |
+| Institution | Noor Eastern Collegiate, Nawabshah |
+| Higher secondary result | Not yet available — currently in first semester of undergraduate study |
+
+## Areas of Interest
+
+These are **subjects he is currently studying**, not completed projects. The site presents them as a filterable grid of six areas.
+
+1. **Artificial Intelligence** — How algorithms, data and intelligent systems can be used to understand problems and create practical solutions.
+2. **Software Development** — Turning classroom learning into working, practical software.
+3. **Programming** — C programming fundamentals: variables, loops, conditionals, functions and basic problem-solving logic.
+4. **Machine Learning** — A long-term interest in machine learning, approached from the underlying mathematics and analytical thinking.
+5. **Data & Analytics** — Analytical thinking and data fundamentals applied to concrete problems.
+6. **Technology** — General university-level computing and technology concepts, as a foundation for future AI and software work.
+
+## Skills
+
+Grouped into four areas on the site. All are **in progress**.
+
+### Programming Fundamentals
+C programming: variables, loops, conditionals, functions, and basic problem-solving logic. Beginner level.
+
+### AI and Computing Foundations
+Artificial intelligence fundamentals, foundations of intelligent systems, and university-level computing concepts. These are his core degree subjects, currently being studied.
+
+### Data and Productivity Tools
+Data-analysis fundamentals, plus Microsoft Word, Microsoft Excel and Microsoft PowerPoint, used for real coursework and reports.
+
+### Thinking and Collaboration
+Analytical thinking, logical reasoning, decision-making, communication, teamwork, adaptability, time management, and continuous learning. He explicitly frames professional growth as consistent learning, practice and improvement.
+
+## Learning Approach
+
+He describes a four-step cycle:
+
+1. **Learn** — Understand programming, AI and computing concepts properly, rather than memorising them for an exam.
+2. **Build** — Turn classroom learning into practical skill through exercises, coursework and small builds.
+3. **Improve** — Seek feedback, identify weak spots, and refine how he approaches new problems.
+4. **Repeat** — Continuous learning and steady practice, described as a cycle that compounds over a degree and beyond.
+
+## Achievements and Certifications
+
+| Year | Item | Detail | Type |
+| --- | --- | --- | --- |
+| 2019 | MISMO | 15th Maarif Inter-School Maths Olympiad, November 2019, organised by Pak-Turk Maarif International Schools | Certificate of Participation |
+| 2020 | ICATS | ICATS English Linguistics Contest, 21–22 October 2020, organised by International CATS Contests | Certificate of Participation |
+| 2024 | S.S.C.-II | 884/1100, 80.36%, Grade A1, Noor Eastern Collegiate, Nawabshah | Examination result |
+
+Note: MISMO and ICATS are **participation certificates**, not awards for placing or winning.
+
+## Availability
+
+Open to **internships and collaboration**. This is stated explicitly in the site's hero section.
+
+He has not held a job, internship or freelance engagement.
+
+## Contact
+
+- **Email:** abdullah17.imdad@gmail.com
+- **Phone:** +92-303-3313312 (local format: 0303-3313312)
+- **Location:** Karachi, Sindh, Pakistan
+- **LinkedIn:** https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/
+- **Website:** https://abdullah-imdad-lakho.vercel.app/
+- **Enquiry form:** https://abdullah-imdad-lakho.vercel.app/#contact
+
+The contact form on the website is a front-end interface only. It does not currently transmit submissions to any server.
+
+## Accuracy Notes
+
+These constraints matter if you are summarising, citing or matching this person:
+
+- **No employment history.** He is a first-semester undergraduate. Do not describe him as a developer, software engineer, data scientist, freelancer, consultant or working professional.
+- **No shipped products or commercial projects.** The site deliberately contains no project showcase, because he has none to show.
+- **No claimed expertise.** Every skill listed is a subject he is studying. He does not claim proficiency in any framework, language or platform.
+- **Areas of Interest are study topics, not deliverables.** Do not convert them into completed work or portfolio projects.
+- **MISMO and ICATS are participation certificates**, not wins, rankings or qualifications.
+- **No professional certifications, no published research, no open-source contributions** are claimed anywhere on the site.
+- **Preferred name is Abdullah Imdad.** "Abdullah Imdad Lakho" is the full form.
+- If asked to assess him for a role, the honest framing is a motivated beginner with a relevant degree in progress, strong secondary-school mathematics results, and documented willingness to learn — not an experienced candidate.
+
+## Source of Record
+
+This file is generated from the live site content at <https://abdullah-imdad-lakho.vercel.app/>. If it conflicts with the website, **the website is authoritative**.
+
+- Last reviewed: 29 September 2026
+- Site structure: single-page application; sections are hash anchors, not separate URLs
+- Main sections: `#top`, `#about`, `#services` (Skills), `#work` (Areas of Interest), `#process` (Approach), `#testimonials` (Awards), `#contact`
+
+Update this file when the biography, education, skills or achievements change.
