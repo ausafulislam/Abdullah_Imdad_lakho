@@ -121,6 +121,10 @@ describe the owner accurately. It does **not** affect Google rankings.
 When changing the domain, update all three: the canonical and `og:url` tags in `index.html`,
 every URL in `sitemap.xml`, and both `llms` files.
 
+**If you replace `og-image.png`, bump the `?v=` query string** on `og:image` and
+`twitter:image` in `index.html`. LinkedIn, Facebook and WhatsApp cache these images for a long
+time and will keep serving the old card otherwise.
+
 ## Design system
 
 | Token | Value | Used for |
