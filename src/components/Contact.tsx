@@ -319,12 +319,6 @@ export default function Contact() {
                   Send via WhatsApp
                   <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </button>
-                <p className="text-xs leading-relaxed text-cream/40 sm:col-span-2">
-                  Submitting opens WhatsApp with your message written out. You
-                  review it and press send there &mdash; this site has no server
-                  and nothing is sent automatically. Your details and phone
-                  number are shared with Abdullah.
-                </p>
               </>
             )}
 

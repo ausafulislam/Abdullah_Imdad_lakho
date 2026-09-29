@@ -1,5 +1,7 @@
-import { ArrowUp, Mail } from "lucide-react";
+import { ArrowUp, ExternalLink, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
+
+const EMAIL = "abdullah17.imdad@gmail.com";
 
 export default function Footer() {
   const [show, setShow] = useState(false);
@@ -12,89 +14,58 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="safe-b border-t border-ink/10 bg-cream pb-28 pt-8 sm:py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-5 px-5 text-center sm:px-6 md:flex-row md:justify-between md:px-10 md:text-left">
-          <p className="font-display text-base font-semibold text-ink sm:text-lg">
-            ABDULLAH<span className="text-coral">.</span>IMDAD
-          </p>
+      <footer className="border-t border-ink/10 bg-cream">
+        <div className="mx-auto max-w-7xl px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] pt-12 sm:px-6 sm:pb-12 sm:pt-16 md:px-10">
+          <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:justify-between md:text-left">
+            <div>
+              <p className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
+                ABDULLAH<span className="text-coral">.</span>IMDAD
+              </p>
+              <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink/45">
+                BS Artificial Intelligence at Dawood University of Engineering
+                &amp; Technology, Karachi.
+              </p>
+            </div>
 
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {[
-              { label: "Interest", href: "#work" },
-              { label: "About", href: "#about" },
-              { label: "Skills", href: "#services" },
-              { label: "Approach", href: "#process" },
-              { label: "Contact", href: "#contact" },
-            ].map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-sm text-ink/50 transition-colors hover:text-coral"
-              >
-                {l.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-4">
             <a
-              href="mailto:abdullah17.imdad@gmail.com"
-              className="inline-flex items-center gap-2 text-sm text-ink/50 transition-colors hover:text-coral"
+              href={`mailto:${EMAIL}`}
+              className="group inline-flex items-center gap-2.5 rounded-full border border-ink/15 px-5 py-2.5 text-sm text-ink/70 transition-colors hover:border-coral hover:text-coral"
             >
-              <Mail className="h-4 w-4" /> abdullah17.imdad@gmail.com
+              <Mail className="h-4 w-4 text-ink/40 transition-colors group-hover:text-coral" />
+              {EMAIL}
             </a>
           </div>
-        </div>
 
-        <div className="mx-auto mt-6 max-w-7xl border-t border-ink/10 px-5 pt-6 sm:px-6 md:px-10">
-          <div className="flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
+          <div className="mt-10 flex flex-col items-center gap-4 border-t border-ink/10 pt-6 text-center sm:flex-row sm:justify-between sm:text-left">
             <p className="text-xs text-ink/40">
-              © {new Date().getFullYear()} Abdullah Imdad. Built with care in Karachi, Pakistan.
+              &copy; {new Date().getFullYear()} Abdullah Imdad. All rights
+              reserved.
             </p>
             <a
               href="https://ausafulislam.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-ink/40 transition-colors hover:text-coral"
+              className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-xs text-ink/60 transition-colors hover:border-coral hover:text-coral"
             >
-              Built by <span className="font-medium">Ausaf</span>
+              <span className="text-ink/40">Built by</span>
+              <span className="font-display font-medium text-ink group-hover:text-coral">
+                Ausaf
+              </span>
+              <ExternalLink className="h-3 w-3 opacity-50 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
         </div>
       </footer>
 
-      {/* Floating action buttons */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Back to top"
-        className={`fixed bottom-24 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream shadow-xl transition-all duration-300 hover:bg-coral hover:text-ink sm:bottom-6 sm:right-6 sm:h-12 sm:w-12 ${
+        className={`fixed bottom-5 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream shadow-xl transition-all duration-300 hover:bg-coral hover:text-ink sm:bottom-6 sm:right-6 sm:h-12 sm:w-12 ${
           show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
         }`}
       >
         <ArrowUp className="h-5 w-5" />
       </button>
-
-      {/* Mobile sticky contact bar */}
-      <div
-        className={`safe-b fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-cream/95 px-4 py-3 backdrop-blur-lg transition-transform duration-300 sm:hidden ${
-          show ? "translate-y-0" : "translate-y-full"
-        }`}
-      >
-        <div className="flex items-center gap-3">
-          <a
-            href="mailto:abdullah17.imdad@gmail.com"
-            className="flex-1 rounded-full border border-ink/20 py-3 text-center font-display text-sm font-medium text-ink"
-          >
-            Email me
-          </a>
-          <a
-            href="#contact"
-            className="flex-1 rounded-full bg-ink py-3 text-center font-display text-sm font-medium text-cream"
-          >
-            Start a conversation
-          </a>
-        </div>
-      </div>
     </>
   );
 }
