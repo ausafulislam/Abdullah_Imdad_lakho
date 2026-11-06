@@ -12,19 +12,19 @@
 
 ## Skills
 
-- [Skills](https://abdullah-imdad-lakho.vercel.app/#services): Four skill groups — C programming fundamentals, AI and computing foundations, data and productivity tools including Microsoft Word, Excel and PowerPoint, and thinking and collaboration.
+- [Skills](https://abdullah-imdad-lakho.vercel.app/#skills): Four skill groups — C programming fundamentals, AI and computing foundations, data and productivity tools including Microsoft Word, Excel and PowerPoint, and thinking and collaboration.
 
 ## Areas of Interest
 
-- [Areas of Interest](https://abdullah-imdad-lakho.vercel.app/#work): Six filterable subject areas he is studying: artificial intelligence, software development, programming, machine learning, data analytics, and general computing.
+- [Areas of Interest](https://abdullah-imdad-lakho.vercel.app/#work): Six subject areas he is studying: artificial intelligence, software development, programming, machine learning, data analytics, and general computing.
 
-## Approach
+## How I Learn
 
-- [Approach](https://abdullah-imdad-lakho.vercel.app/#process): His four-step learning cycle — Learn, Build, Improve, Repeat — describing how coursework becomes practical skill.
+- [How I Learn](https://abdullah-imdad-lakho.vercel.app/#experience): His four-step learning cycle — Learn, Build, Improve, Repeat — describing how coursework becomes practical skill.
 
 ## Achievements
 
-- [Awards](https://abdullah-imdad-lakho.vercel.app/#testimonials): Verified academic record — S.S.C.-II scored 884/1100 (80.36%, Grade A1), plus participation certificates for MISMO 2019 and ICATS 2020.
+- [Achievements](https://abdullah-imdad-lakho.vercel.app/#achievements): Verified academic record — S.S.C.-II scored 884/1100 (80.36%, Grade A1), plus participation certificates for MISMO 2019 and ICATS 2020.
 
 ## Key Facts
 

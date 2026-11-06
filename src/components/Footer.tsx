@@ -1,70 +1,97 @@
-import { ArrowUp, ExternalLink, Mail } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowUp, ExternalLink, Mail, Phone } from "lucide-react";
+import { CONTACT, MAILTO_URL, NAV_LINKS, PROFILE } from "../data/portfolio";
+import { useScrolledPast } from "../hooks/usePortfolio";
+import { useSmoothScroll } from "./SmoothScroll";
+import { LinkedInIcon, Logo } from "./icons";
+import { cn } from "../utils/cn";
 
-const EMAIL = "abdullah17.imdad@gmail.com";
+const SOCIALS = [
+  { label: "LinkedIn", href: CONTACT.linkedin, external: true, Icon: LinkedInIcon },
+  { label: "Email", href: MAILTO_URL, external: false, Icon: Mail },
+  { label: "Phone", href: CONTACT.phoneHref, external: false, Icon: Phone },
+];
 
 export default function Footer() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 700);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const showBackToTop = useScrolledPast(700);
+  const { scrollTo } = useSmoothScroll();
 
   return (
     <>
-      <footer className="border-t border-ink/10 bg-cream">
-        <div className="mx-auto max-w-7xl px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] pt-12 sm:px-6 sm:pb-12 sm:pt-16 md:px-10">
-          <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:justify-between md:text-left">
-            <div>
-              <p className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
-                ABDULLAH<span className="text-coral">.</span>IMDAD
-              </p>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink/45">
-                BS Artificial Intelligence at Dawood University of Engineering
-                &amp; Technology, Karachi.
-              </p>
-            </div>
-
-            <a
-              href={`mailto:${EMAIL}`}
-              className="group inline-flex items-center gap-2.5 rounded-full border border-ink/15 px-5 py-2.5 text-sm text-ink/70 transition-colors hover:border-coral hover:text-coral"
-            >
-              <Mail className="h-4 w-4 text-ink/40 transition-colors group-hover:text-coral" />
-              {EMAIL}
+      <footer className="border-t border-line">
+        <div className="shell pb-[calc(2rem+env(safe-area-inset-bottom,0px))] pt-10 sm:pt-12">
+          <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+            <a href="#top" className="flex w-fit items-center gap-4 rounded-md">
+              <Logo className="h-7 w-auto text-ink" />
+              <span>
+                <span className="block text-base font-semibold tracking-[-0.015em]">{PROFILE.name}</span>
+                <span className="block text-[0.8125rem] text-muted">{PROFILE.title}</span>
+              </span>
             </a>
+
+            <nav aria-label="Footer">
+              <ul className="flex flex-wrap gap-x-7 gap-y-2">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.id}>
+                    <a href={link.href} className="text-sm font-medium text-[#4d4d4d] transition-colors hover:text-ink">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <ul className="flex gap-2 lg:justify-end">
+              {SOCIALS.map(({ label, href, external, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    aria-label={external ? `${label} (opens in a new tab)` : label}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-ink"
+                  >
+                    <Icon className="h-[1.125rem] w-[1.125rem]" aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="mt-10 flex flex-col items-center gap-4 border-t border-ink/10 pt-6 text-center sm:flex-row sm:justify-between sm:text-left">
-            <p className="text-xs text-ink/40">
-              &copy; {new Date().getFullYear()} Abdullah Imdad. All rights
-              reserved.
+          <div className="mt-8 flex flex-col gap-4 border-t border-line pt-6 text-[0.8125rem] sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-muted">
+              &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
             </p>
-            <a
-              href="https://ausafulislam.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2 text-xs text-ink/60 transition-colors hover:border-coral hover:text-coral"
-            >
-              <span className="text-ink/40">Built by</span>
-              <span className="font-display font-medium text-ink group-hover:text-coral">
-                Ausaf
-              </span>
-              <ExternalLink className="h-3 w-3 opacity-50 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a
+                href="https://ausafulislam.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-1.5 text-muted transition-colors hover:text-ink"
+              >
+                Built by <span className="font-semibold text-ink">Ausaf</span>
+                <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+              <p className="inline-flex items-center gap-3 font-medium text-ink">
+                <span aria-hidden="true" className="h-[2px] w-8 rounded-full bg-lime" />
+                Build. Learn. Grow.
+              </p>
+            </div>
           </div>
         </div>
       </footer>
 
       <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        type="button"
+        onClick={() => scrollTo(0)}
         aria-label="Back to top"
-        className={`fixed bottom-5 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream shadow-xl transition-all duration-300 hover:bg-coral hover:text-ink sm:bottom-6 sm:right-6 sm:h-12 sm:w-12 ${
-          show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
-        }`}
+        tabIndex={showBackToTop ? 0 : -1}
+        className={cn(
+          "fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink shadow-[0_8px_24px_-12px_rgb(0_0_0/0.25)] transition-[opacity,translate,background-color,border-color] duration-300 hover:border-lime hover:bg-lime sm:bottom-6 sm:right-6",
+          showBackToTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0",
+        )}
       >
-        <ArrowUp className="h-5 w-5" />
+        <ArrowUp className="h-[1.125rem] w-[1.125rem]" aria-hidden="true" />
       </button>
     </>
   );

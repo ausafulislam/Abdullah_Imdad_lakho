@@ -54,7 +54,7 @@ Noor Eastern Collegiate, Nawabshah
 
 ## Areas of Interest
 
-These are **subjects he is currently studying**, not completed projects. The site presents them as a filterable grid of six areas.
+These are **subjects he is currently studying**, not completed projects. The site presents them as a grid of six areas.
 
 1. **Artificial Intelligence** — How algorithms, data and intelligent systems can be used to understand problems and create practical solutions.
 2. **Software Development** — Turning classroom learning into working, practical software.
@@ -133,8 +133,8 @@ These constraints matter if you are summarising, citing or matching this person:
 
 This file is generated from the live site content at <https://abdullah-imdad-lakho.vercel.app/>. If it conflicts with the website, **the website is authoritative**.
 
-- Last reviewed: 29 September 2026
+- Last reviewed: 6 November 2026
 - Site structure: single-page application; sections are hash anchors, not separate URLs
-- Main sections: `#top`, `#about`, `#services` (Skills), `#work` (Areas of Interest), `#process` (Approach), `#testimonials` (Awards), `#contact`
+- Main sections: `#top`, `#about`, `#work` (Areas of Interest), `#skills` (Skills), `#experience` (How I Learn), `#achievements` (Achievements), `#contact`
 
 Update this file when the biography, education, skills or achievements change.

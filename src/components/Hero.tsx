@@ -1,190 +1,132 @@
-import { ArrowDown, ArrowRight, Sparkles, Star } from "lucide-react";
-import { useCountUp } from "../hooks/usePortfolio";
+import { useRef } from "react";
+import { ArrowDown, ArrowRight } from "lucide-react";
+import { HERO_STATS, PROFILE } from "../data/portfolio";
+import { gsap, useGSAP, MOTION_OK } from "../lib/gsap";
+import { cn } from "../utils/cn";
 
-function Stat({
-  target,
-  suffix,
-  label,
-}: {
-  target: number;
-  suffix: string;
-  label: string;
-}) {
-  const { ref, value } = useCountUp(target);
-  return (
-    <div className="flex-1">
-      <p className="t-stat font-display font-semibold tracking-tight text-ink">
-        <span ref={ref}>{value}</span>
-        {suffix}
-      </p>
-      <p className="mt-1 text-[0.72rem] leading-snug text-ink/55 sm:text-[0.8rem]">{label}</p>
-    </div>
-  );
-}
+/** 1×1 transparent GIF: what phones "load" instead of the portrait (see <picture> below). */
+const BLANK =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 export default function Hero() {
+  const root = useRef<HTMLElement>(null);
+
+  // Entrance: pill → heading → title/description → CTAs → stats → portrait.
+  // Selectors are scoped to this section by useGSAP; matchMedia skips it all
+  // for reduced motion, and everything is reverted on unmount.
+  useGSAP(
+    () => {
+      gsap.matchMedia().add(MOTION_OK, () => {
+        const tl = gsap.timeline({ delay: 0.2, defaults: { ease: "power3.out" } });
+        tl.from("[data-hero='pill']", { y: 12, opacity: 0, duration: 0.6 })
+          .from("[data-hero='line']", { yPercent: 110, duration: 1, stagger: 0.09, ease: "power4.out" }, 0.2)
+          .from("[data-hero='copy']", { y: 18, opacity: 0, duration: 0.7, stagger: 0.08 }, 0.55)
+          .from("[data-hero='cta']", { y: 16, opacity: 0, duration: 0.6, stagger: 0.08 }, 0.8)
+          .from("[data-hero='stat']", { y: 16, opacity: 0, duration: 0.6, stagger: 0.1 }, 0.95)
+          .from(
+            "[data-hero='count']",
+            { textContent: 0, duration: 1.1, ease: "power2.out", snap: { textContent: 1 }, stagger: 0.1 },
+            0.95,
+          )
+          .from("[data-hero='portrait']", { y: 32, opacity: 0, duration: 1.2 }, 0.75);
+      });
+    },
+    { scope: root },
+  );
+
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden pb-14 pt-24 sm:pb-16 sm:pt-28 lg:pb-20 lg:pt-36"
-    >
-      {/* soft background washes */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-28 top-6 h-60 w-60 rounded-full bg-coral/15 blur-3xl sm:h-72 sm:w-72"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-20 top-1/4 h-60 w-60 rounded-full bg-gold/15 blur-3xl sm:h-72 sm:w-72"
-      />
-      {/* subtle dotted texture */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-40 opacity-[0.35] [mask-image:linear-gradient(to_bottom,black,transparent)]"
-        style={{
-          backgroundImage: "radial-gradient(rgba(20,18,15,0.18) 1px, transparent 1px)",
-          backgroundSize: "22px 22px",
-        }}
-      />
+    <section ref={root} id="top" aria-labelledby="hero-title" className="relative pt-[var(--header-h)]">
+      <div className="shell grid items-end gap-x-10 md:grid-cols-[1.1fr_0.9fr] lg:gap-x-14">
+        {/* Copy */}
+        <div className="pb-8 pt-8 sm:pt-12 md:self-center md:pb-16 md:pt-10 lg:pb-20">
+          <p
+            data-hero="pill"
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-[#fafafa] py-1.5 pl-3 pr-3.5 text-[0.8125rem] font-medium text-ink"
+          >
+            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-lime" />
+            Available for internships &amp; collaboration
+          </p>
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 md:px-10">
-        <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 xl:gap-20">
-          {/* ---------- Left : copy ---------- */}
-          <div className="max-w-xl animate-fade-up lg:max-w-none">
-            <div className="inline-flex items-center gap-2 rounded-full border border-ink/12 bg-white/70 py-1.5 pl-2 pr-4 shadow-sm backdrop-blur">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-600" />
+          <h1 id="hero-title" className="t-display mt-6 md:mt-7">
+            <span className="block overflow-hidden pb-[0.07em]">
+              <span data-hero="line" className="block">
+                {PROFILE.firstName}
               </span>
-              <span className="font-display text-[0.68rem] font-medium uppercase tracking-[0.14em] text-ink/70 sm:text-[0.72rem]">
-                Available for internships &amp; collaboration
+            </span>{" "}
+            <span className="-mt-[0.07em] block overflow-hidden pb-[0.07em]">
+              <span data-hero="line" className="block text-muted">
+                {PROFILE.lastName}
               </span>
-            </div>
+            </span>
+          </h1>
 
-            <h1 className="t-hero mt-5 font-display font-semibold text-ink sm:mt-6">
-              Building my foundation in Artificial Intelligence,{" "}
-              <span className="relative inline-block font-serif-display font-medium italic text-coral">
-                one step
-                <svg
-                  aria-hidden
-                  viewBox="0 0 120 12"
-                  className="absolute -bottom-1 left-0 w-full text-coral/60"
-                  fill="none"
-                >
-                  <path
-                    d="M3 9C30 3 70 3 117 7"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>{" "}
-              at a time.
-            </h1>
+          <p
+            data-hero="copy"
+            className="mt-5 text-[1.1875rem] font-semibold tracking-[-0.02em] sm:text-[1.3125rem] lg:mt-6 lg:text-[1.4375rem]"
+          >
+            {PROFILE.title}
+          </p>
+          <p data-hero="copy" className="t-lead mt-3 max-w-[25rem] text-muted">
+            {PROFILE.tagline}
+          </p>
 
-            <p className="t-lead mt-5 max-w-md text-ink/65 sm:mt-6">
-              I&apos;m Abdullah Imdad (Lakho) — a BS Artificial Intelligence
-              student in my first
-              semester at DUET, Karachi. I&apos;m at the beginning of my journey,
-              focused on getting the fundamentals of programming, AI and
-              analytical thinking right.
-            </p>
-
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a
-                href="#work"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 font-display text-sm font-medium text-cream transition-all hover:bg-coral hover:text-ink sm:w-auto"
-              >
-                Areas of Interest
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-full border border-ink/20 px-6 py-3.5 font-display text-sm font-medium text-ink transition-colors hover:border-ink hover:bg-ink hover:text-cream"
-              >
-                Get in Touch
-              </a>
-            </div>
-
-            {/* compact stats with dividers */}
-            <div className="mt-9 flex items-stretch gap-5 border-t border-ink/10 pt-6 sm:mt-10 sm:gap-7">
-              <Stat target={6} suffix="" label="Areas of focus" />
-              <div aria-hidden className="w-px bg-ink/10" />
-              <Stat target={18} suffix="" label="Skills in progress" />
-              <div aria-hidden className="w-px bg-ink/10" />
-              <Stat target={3} suffix="" label="Academic certificates" />
-            </div>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a data-hero="cta" href="#work" className="btn btn-lime max-sm:px-[1.125rem] max-sm:text-[0.875rem]">
+              Areas of Interest
+              <ArrowRight className="btn-arrow h-4 w-4" aria-hidden="true" />
+            </a>
+            <a data-hero="cta" href="#about" className="btn btn-outline group pl-1.5 max-sm:pr-[1.125rem] max-sm:text-[0.875rem]">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-line transition-colors group-hover:border-ink sm:h-9 sm:w-9">
+                <ArrowDown className="h-4 w-4" aria-hidden="true" />
+              </span>
+              Scroll Down
+            </a>
           </div>
 
-          {/* ---------- Right : visual ---------- */}
-          <div className="animate-fade-up [animation-delay:140ms] lg:justify-self-end lg:pl-2">
-            <div className="relative mx-auto w-full max-w-[20rem] sm:max-w-[24rem] lg:mx-0 lg:max-w-[25rem] xl:max-w-[27rem]">
-              {/* offset frame */}
+          <dl className="mt-10 grid max-w-[30rem] grid-cols-3 lg:mt-12">
+            {HERO_STATS.map((stat, i) => (
               <div
-                aria-hidden
-                className="absolute -inset-0 translate-x-3 translate-y-3 rounded-[1.6rem] border-2 border-ink/10"
-              />
-              <div className="relative overflow-hidden rounded-[1.6rem] shadow-[0_24px_60px_-20px_rgba(20,18,15,0.35)] ring-1 ring-ink/10">
-                <img
-                  src="/images/hero-portrait.png"
-                  alt="Abstract artwork representing artificial intelligence"
-                  width={1145}
-                  height={1374}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="aspect-[5/6] w-full object-cover"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent"
-                />
-              </div>
-
-              {/* floating rating badge — top */}
-              <div className="absolute -right-3 top-5 flex items-center gap-2.5 rounded-2xl border border-ink/10 bg-cream/95 px-3.5 py-2.5 shadow-lg backdrop-blur sm:-right-5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gold/20">
-                  <Sparkles className="h-4 w-4 text-gold" />
-                </span>
-                <span>
-                  <span className="flex items-center gap-0.5">
-                    {Array.from({ length: 5 }).map((_, s) => (
-                      <Star key={s} className="h-2.5 w-2.5 fill-gold text-gold" />
-                    ))}
+                key={stat.label}
+                data-hero="stat"
+                className={cn("flex flex-col", i > 0 && "border-l border-line pl-4 sm:pl-6", i < 2 && "pr-3")}
+              >
+                <dt className="order-2 mt-1 text-[0.8125rem] leading-snug text-muted">{stat.label}</dt>
+                <dd className="order-1 text-[1.5rem] font-bold leading-none tracking-[-0.03em] sm:text-[1.625rem]">
+                  <span className="sr-only">
+                    {stat.value}
+                    {stat.suffix}
                   </span>
-                  <span className="mt-0.5 block text-[0.68rem] font-medium text-ink/70">
-                    Grade A1 · 80.36%
+                  <span aria-hidden="true">
+                    <span data-hero="count">{stat.value}</span>
+                    {stat.suffix}
                   </span>
-                </span>
+                </dd>
               </div>
-
-              {/* floating quote — bottom */}
-              <div className="absolute -bottom-5 -left-3 flex max-w-[15rem] items-start gap-2.5 rounded-2xl bg-ink px-4 py-3.5 text-cream shadow-xl sm:-left-6">
-                <span className="font-serif-display text-3xl italic leading-[0.8] text-coral">
-                  &ldquo;
-                </span>
-                <p className="pt-1 text-[0.72rem] leading-snug text-cream/85 sm:text-xs">
-                  Learn → Build → Improve → Repeat.
-                </p>
-              </div>
-            </div>
-          </div>
+            ))}
+          </dl>
         </div>
 
-        {/* scroll cue */}
-        <div className="mt-14 hidden justify-center lg:mt-16 lg:flex">
-          <a
-            href="#work"
-            className="group flex flex-col items-center gap-2 text-ink/35 transition-colors hover:text-coral"
-            aria-label="Scroll to work"
-          >
-            <span className="font-display text-[0.65rem] font-medium uppercase tracking-[0.25em]">
-              Scroll
-            </span>
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 transition-colors group-hover:border-coral">
-              <ArrowDown className="h-4 w-4 animate-bounce" />
-            </span>
-          </a>
+        {/* Portrait — tablet and up. Phones get a text-only hero and download nothing:
+            the WebP <source> is media-gated and the <img> fallback is an inline 1×1 GIF.
+            The light disc is part of the image, so the hoodie is trimmed exactly on its arc. */}
+        <div data-hero="portrait" className="hidden md:block md:self-center md:py-8 lg:py-10">
+          <picture>
+            <source
+              media="(min-width: 48rem)"
+              type="image/webp"
+              srcSet="/images/abdullah-hero-portrait-640.webp 640w, /images/abdullah-hero-portrait.webp 960w"
+              sizes="(min-width: 80rem) 33rem, 42vw"
+            />
+            <img
+              src={BLANK}
+              alt="Black-and-white portrait of Abdullah Imdad Lakho"
+              width={960}
+              height={1200}
+              fetchPriority="high"
+              decoding="async"
+              className="ml-auto block h-auto w-full max-w-[33rem]"
+            />
+          </picture>
         </div>
       </div>
     </section>

@@ -1,75 +1,212 @@
-export type Project = {
-  id: string;
-  title: string;
-  category:
-    | "Artificial Intelligence"
-    | "Software Development"
-    | "Programming"
-    | "Machine Learning"
-    | "Data & Analytics"
-    | "Technology";
-  year: string;
-  image: string;
-  blurb: string;
+/**
+ * Single source of truth for portfolio content and contact details.
+ * Components only render what is defined here — keep it factual: no invented
+ * experience, clients, projects or achievements.
+ */
+
+/* ------------------------------------------------------------------ */
+/* Identity & contact                                                  */
+/* ------------------------------------------------------------------ */
+
+export const PROFILE = {
+  name: "Abdullah Imdad Lakho",
+  firstName: "Abdullah",
+  lastName: "Imdad Lakho",
+  title: "BS AI Student at DUET Karachi",
+  tagline: "Building my foundation in Artificial Intelligence, one step at a time.",
+  siteUrl: "https://abdullah-imdad-lakho.vercel.app",
+} as const;
+
+export const CONTACT = {
+  email: "abdullah17.imdad@gmail.com",
+  phoneDisplay: "0303-3313312",
+  /** Dialable local number for tel: links. */
+  phoneHref: "tel:03033313312",
+  location: "Karachi, Pakistan",
+  /** wa.me needs country code + number, with no "+", spaces, or leading zero. */
+  whatsappNumber: "923033313312",
+  linkedin: "https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/",
+} as const;
+
+export const WHATSAPP_URL = `https://wa.me/${CONTACT.whatsappNumber}`;
+export const MAILTO_URL = `mailto:${CONTACT.email}`;
+
+/* ------------------------------------------------------------------ */
+/* Navigation                                                          */
+/* ------------------------------------------------------------------ */
+
+export type SectionId = "top" | "about" | "work" | "experience" | "achievements" | "contact";
+
+export const NAV_LINKS: { label: string; href: `#${SectionId}`; id: SectionId }[] = [
+  { label: "Home", href: "#top", id: "top" },
+  { label: "About", href: "#about", id: "about" },
+  { label: "Work", href: "#work", id: "work" },
+  { label: "Experience", href: "#experience", id: "experience" },
+  { label: "Contact", href: "#contact", id: "contact" },
+];
+
+/** Sections that drive the active nav indicator, in page order. */
+export const SPY_SECTIONS: SectionId[] = ["top", "about", "work", "experience", "achievements", "contact"];
+
+/** Sections without their own nav item highlight the closest related one. */
+export const NAV_ALIAS: Partial<Record<SectionId, SectionId>> = {
+  achievements: "experience",
 };
 
-export const projects: Project[] = [
+/* ------------------------------------------------------------------ */
+/* Hero                                                                */
+/* ------------------------------------------------------------------ */
+
+export const HERO_STATS = [
+  { value: 6, suffix: "+", label: "Areas of Focus" },
+  { value: 18, suffix: "+", label: "Skills in Progress" },
+  { value: 3, suffix: "+", label: "Academic Certificates" },
+] as const;
+
+/* ------------------------------------------------------------------ */
+/* About                                                               */
+/* ------------------------------------------------------------------ */
+
+export const ABOUT = {
+  paragraphs: [
+    "I'm Abdullah Imdad Lakho, a BS Artificial Intelligence student at Dawood University of Engineering and Technology (DUET), Karachi. I'm at the beginning of my journey in technology, focused on developing a strong foundation in programming, artificial intelligence, problem-solving, analytical thinking, mathematics and digital technology.",
+    "My interest in AI comes from curiosity about how computers, algorithms, data and intelligent systems can be used to understand problems and create practical solutions.",
+  ],
+} as const;
+
+export type EducationIcon = "graduation" | "book" | "award" | "community";
+
+export const EDUCATION: { icon: EducationIcon; title: string; meta: string[] }[] = [
+  { icon: "graduation", title: "BS Artificial Intelligence", meta: ["DUET, Karachi", "2026 – Present"] },
+  { icon: "book", title: "Intermediate", meta: ["D.J. Sindh Science College", "Completed"] },
+  { icon: "award", title: "S.S.C.-II", meta: ["Noor Eastern Collegiate", "2024"] },
+  { icon: "community", title: "AI Community / AICP – DUET", meta: ["Interested in participation & coordination"] },
+];
+
+/* ------------------------------------------------------------------ */
+/* Areas of interest                                                  */
+/* ------------------------------------------------------------------ */
+
+export type InterestIcon = "cpu" | "code" | "laptop" | "chart" | "database" | "bulb";
+
+export type Interest = {
+  id: string;
+  title: string;
+  icon: InterestIcon;
+  summary: string;
+};
+
+export const interests: Interest[] = [
   {
     id: "ai-foundations",
-    title: "Foundations of Intelligent Systems",
-    category: "Artificial Intelligence",
-    year: "2026",
-    image: "/images/interest-ai-systems.svg",
-    blurb: "How algorithms, data and intelligent systems can be used to understand problems and create practical solutions.",
+    title: "Artificial Intelligence",
+    icon: "cpu",
+    summary: "Exploring intelligent systems.",
   },
   {
     id: "software-dev",
-    title: "From Theory to Working Code",
-    category: "Software Development",
-    year: "2026",
-    image: "/images/interest-software.svg",
-    blurb: "Turning what I learn in the classroom into practical skills and meaningful, working software.",
+    title: "Software Development",
+    icon: "code",
+    summary: "Turning ideas into real projects.",
   },
   {
     id: "programming",
-    title: "C, Loops, Functions & Logic",
-    category: "Programming",
-    year: "2026",
-    image: "/images/interest-programming.svg",
-    blurb: "C programming fundamentals — variables, loops, conditionals, functions and basic problem-solving logic.",
+    title: "Programming",
+    icon: "laptop",
+    summary: "Strengthening core programming skills.",
   },
   {
     id: "machine-learning",
-    title: "The Maths Behind ML",
-    category: "Machine Learning",
-    year: "2026",
-    image: "/images/interest-machine-learning.svg",
-    blurb: "A long-term interest in machine learning, starting with the mathematics and analytical thinking underneath it.",
+    title: "Machine Learning",
+    icon: "chart",
+    summary: "Learning the mathematics behind intelligent models.",
   },
   {
     id: "data-analytics",
-    title: "Data-Analysis Fundamentals",
-    category: "Data & Analytics",
-    year: "2026",
-    image: "/images/interest-data-analytics.svg",
-    blurb: "Analytical thinking, logical reasoning and data fundamentals applied to real, concrete problems.",
+    title: "Data & Analytics",
+    icon: "database",
+    summary: "Understanding and finding insights in data.",
   },
   {
     id: "technology",
-    title: "University Computing Concepts",
-    category: "Technology",
-    year: "2026",
-    image: "/images/interest-computing.svg",
-    blurb: "University-level computing and technology concepts for future AI and software projects.",
+    title: "Technology",
+    icon: "bulb",
+    summary: "Exploring computing and digital technologies.",
   },
 ];
 
-export const categories = [
-  "All",
-  "Artificial Intelligence",
-  "Software Development",
-  "Programming",
-  "Machine Learning",
-  "Data & Analytics",
-  "Technology",
+/* ------------------------------------------------------------------ */
+/* Skills in progress (compact block inside the Work section)          */
+/* ------------------------------------------------------------------ */
+
+export const SKILL_GROUPS: { title: string; items: string[] }[] = [
+  {
+    title: "Programming Fundamentals",
+    items: ["C programming", "Variables, loops & conditionals", "Functions", "Problem-solving logic"],
+  },
+  {
+    title: "AI & Computing Foundations",
+    items: ["AI fundamentals", "Intelligent systems", "Maths for computing", "University computing concepts"],
+  },
+  {
+    title: "Data & Productivity Tools",
+    items: ["Data-analysis fundamentals", "Microsoft Word", "Microsoft Excel", "Microsoft PowerPoint"],
+  },
+  {
+    title: "Thinking & Collaboration",
+    items: [
+      "Analytical thinking & logical reasoning",
+      "Decision-making",
+      "Communication & teamwork",
+      "Adaptability & time management",
+      "Continuous learning",
+    ],
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* How I learn                                                         */
+/* ------------------------------------------------------------------ */
+
+export const LEARNING_STEPS = [
+  { n: "01", title: "Learn", desc: "Understanding programming, AI and computing concepts properly." },
+  { n: "02", title: "Build", desc: "Turning what I learn into practical skills through exercises and coursework." },
+  { n: "03", title: "Improve", desc: "Seeking feedback, fixing weak spots and refining my approach." },
+  { n: "04", title: "Repeat", desc: "Continuous learning and steady practice." },
 ] as const;
+
+/* ------------------------------------------------------------------ */
+/* Achievements                                                        */
+/* ------------------------------------------------------------------ */
+
+export type Achievement = {
+  id: string;
+  icon: "award" | "result";
+  kicker: string;
+  title: string;
+  detail: string;
+};
+
+export const ACHIEVEMENTS: Achievement[] = [
+  {
+    id: "mismo-2019",
+    icon: "award",
+    kicker: "MISMO · November 2019",
+    title: "Certificate of Participation at the 15th Maarif Inter-School Maths Olympiad.",
+    detail: "Organised by Pak-Turk Maarif International Schools.",
+  },
+  {
+    id: "icats-2020",
+    icon: "award",
+    kicker: "ICATS · 21–22 October 2020",
+    title: "Certificate of Participation at the ICATS English Linguistics Contest 2020.",
+    detail: "Organised by International CATS Contests.",
+  },
+  {
+    id: "ssc-2024",
+    icon: "result",
+    kicker: "Noor Eastern Collegiate, Nawabshah · 2024",
+    title: "S.S.C.-II Annual Examination 2024.",
+    detail: "Academic result: 884 out of 1100, Grade A1.",
+  },
+];

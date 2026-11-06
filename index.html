@@ -6,11 +6,11 @@
 
     <!-- Primary title: leads with the full name, so both "abdullah imdad"
          and "abdullah imdad lakho" are exact matches. -->
-    <title>Abdullah Imdad Lakho — BS AI Student at DUET Karachi</title>
+    <title>Abdullah Imdad Lakho | BS Artificial Intelligence Student</title>
 
     <meta
       name="description"
-      content="Abdullah Imdad is a BS Artificial Intelligence student at Dawood University of Engineering &amp; Technology, Karachi, learning C programming, AI and data analysis."
+      content="Explore the academic journey, technical interests, skills, and achievements of Abdullah Imdad Lakho, a BS Artificial Intelligence student at DUET Karachi."
     />
 
     <!-- Note: Google ignores this tag. It is kept for other engines only and
@@ -18,10 +18,10 @@
          description, headings, body copy and structured data. -->
     <meta
       name="keywords"
-      content="abdullah imdad, abdullah imdad lakho, abdullah imdad portfolio, abdullah imdad duet, bs artificial intelligence student karachi, ai student portfolio pakistan, dawood university of engineering and technology, duet karachi, machine learning student, data analysis, c programming, artificial intelligence portfolio, software developer karachi"
+      content="abdullah imdad, abdullah imdad lakho, abdullah imdad portfolio, abdullah imdad duet, bs artificial intelligence student karachi, ai student portfolio pakistan, dawood university of engineering and technology, duet karachi, machine learning student, data analysis, c programming, artificial intelligence portfolio"
     />
 
-    <meta name="author" content="Abdullah Imdad" />
+    <meta name="author" content="Abdullah Imdad Lakho" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
 
@@ -31,58 +31,67 @@
 
     <!-- Open Graph: controls the link preview on LinkedIn, WhatsApp, Facebook, Slack. -->
     <meta property="og:type" content="profile" />
-    <meta property="og:site_name" content="Abdullah Imdad" />
+    <meta property="og:site_name" content="Abdullah Imdad Lakho" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://abdullah-imdad-lakho.vercel.app/" />
-    <meta
-      property="og:title"
-      content="Abdullah Imdad Lakho — BS AI Student at DUET Karachi"
-    />
+    <meta property="og:title" content="Abdullah Imdad Lakho | BS Artificial Intelligence Student" />
     <meta
       property="og:description"
-      content="BS Artificial Intelligence student at Dawood University of Engineering &amp; Technology (DUET), Karachi. Building foundations in C programming, artificial intelligence, machine learning and data analysis."
+      content="Explore the academic journey, technical interests, skills, and achievements of Abdullah Imdad Lakho, a BS Artificial Intelligence student at DUET Karachi."
     />
     <!-- Bump the ?v= when og-image.png changes: social platforms cache OG
          images aggressively and will otherwise keep serving the old card. -->
-    <meta
-      property="og:image"
-      content="https://abdullah-imdad-lakho.vercel.app/images/og-image.png?v=2"
-    />
+    <meta property="og:image" content="https://abdullah-imdad-lakho.vercel.app/images/og-image.png?v=3" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Abdullah Imdad — BS Artificial Intelligence student at DUET Karachi"
+      content="Abdullah Imdad Lakho — BS Artificial Intelligence student at DUET Karachi"
     />
     <meta property="profile:first_name" content="Abdullah" />
-    <meta property="profile:last_name" content="Imdad" />
+    <meta property="profile:last_name" content="Imdad Lakho" />
 
     <!-- Twitter/X card: falls back to og:image when this is absent, but
          explicit is safer because Twitter does not read all OG fields. -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Abdullah Imdad Lakho — BS AI Student at DUET Karachi"
-    />
+    <meta name="twitter:title" content="Abdullah Imdad Lakho | BS Artificial Intelligence Student" />
     <meta
       name="twitter:description"
-      content="BS Artificial Intelligence student at DUET Karachi. Building foundations in C programming, AI, machine learning and data analysis."
+      content="The academic journey, interests, skills and achievements of a BS Artificial Intelligence student at DUET Karachi."
     />
-    <meta
-      name="twitter:image"
-      content="https://abdullah-imdad-lakho.vercel.app/images/og-image.png?v=2"
-    />
+    <meta name="twitter:image" content="https://abdullah-imdad-lakho.vercel.app/images/og-image.png?v=3" />
     <meta
       name="twitter:image:alt"
-      content="Abdullah Imdad — BS Artificial Intelligence student at DUET Karachi"
+      content="Abdullah Imdad Lakho — BS Artificial Intelligence student at DUET Karachi"
     />
 
     <!-- Icons and theme colour -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/images/og-image.png" />
-    <meta name="theme-color" content="#14120f" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light" />
+
+    <!-- Critical font: self-hosted variable Plus Jakarta Sans (one file, all weights). -->
+    <link
+      rel="preload"
+      href="/fonts/plus-jakarta-sans-latin-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Hero portrait (LCP on tablet/desktop). Mirrors the <picture> in Hero.tsx;
+         media-gated because phones get a text-only hero and never load it. -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/images/abdullah-hero-portrait.webp"
+      imagesrcset="/images/abdullah-hero-portrait-640.webp 640w, /images/abdullah-hero-portrait.webp 960w"
+      imagesizes="(min-width: 80rem) 33rem, 42vw"
+      media="(min-width: 48rem)"
+      fetchpriority="high"
+    />
 
     <!-- Structured data. Describes visible, accurate content only: a single
          person, their university affiliation, and the topics shown in the
@@ -97,8 +106,8 @@
             "@type": "WebSite",
             "@id": "https://abdullah-imdad-lakho.vercel.app/#website",
             "url": "https://abdullah-imdad-lakho.vercel.app/",
-            "name": "Abdullah Imdad",
-            "description": "Personal portfolio of Abdullah Imdad, BS Artificial Intelligence student at Dawood University of Engineering & Technology, Karachi.",
+            "name": "Abdullah Imdad Lakho",
+            "description": "Personal portfolio of Abdullah Imdad Lakho, BS Artificial Intelligence student at Dawood University of Engineering & Technology (DUET), Karachi.",
             "inLanguage": "en",
             "publisher": {
               "@id": "https://abdullah-imdad-lakho.vercel.app/#person"
@@ -107,8 +116,8 @@
           {
             "@type": "Person",
             "@id": "https://abdullah-imdad-lakho.vercel.app/#person",
-            "name": "Abdullah Imdad",
-            "alternateName": "Abdullah Imdad Lakho",
+            "name": "Abdullah Imdad Lakho",
+            "alternateName": "Abdullah Imdad",
             "url": "https://abdullah-imdad-lakho.vercel.app/",
             "image": {
               "@type": "ImageObject",
@@ -119,11 +128,16 @@
             "email": "mailto:abdullah17.imdad@gmail.com",
             "telephone": "+92-303-3313312",
             "jobTitle": "BS Artificial Intelligence Student",
-            "description": "Abdullah Imdad is a Bachelor of Science student in Artificial Intelligence at Dawood University of Engineering & Technology (DUET), Karachi. His focus areas are C programming, artificial intelligence fundamentals, machine learning and data analysis.",
+            "description": "Abdullah Imdad Lakho is a first-semester Bachelor of Science student in Artificial Intelligence at Dawood University of Engineering & Technology (DUET), Karachi, building foundations in programming, artificial intelligence, mathematics and data analysis.",
             "affiliation": {
               "@type": "CollegeOrUniversity",
               "name": "Dawood University of Engineering & Technology",
-              "alternateName": "DUET"
+              "alternateName": "DUET",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Karachi",
+                "addressCountry": "PK"
+              }
             },
             "address": {
               "@type": "PostalAddress",
@@ -141,23 +155,24 @@
               "Microsoft Word",
               "Microsoft PowerPoint"
             ],
-            "sameAs": [
-              "https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/"
-            ]
+            "sameAs": ["https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/"]
           }
         ]
       }
     </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="max-width: 40rem; margin: 0 auto; padding: 4rem 1.5rem; font-family: system-ui, sans-serif; color: #111">
+        <h1 style="margin: 0 0 0.5rem; font-size: 2rem">Abdullah Imdad Lakho</h1>
+        <p style="margin: 0 0 1rem; color: #555">BS AI Student at DUET Karachi</p>
+        <p style="margin: 0">
+          Email: <a href="mailto:abdullah17.imdad@gmail.com">abdullah17.imdad@gmail.com</a> · Phone:
+          <a href="tel:03033313312">0303-3313312</a>
+        </p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
