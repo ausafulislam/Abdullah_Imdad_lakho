@@ -40,8 +40,11 @@ export default function Work() {
     <section ref={root} id="work" aria-labelledby="work-title" className="section-y">
       <div className="shell">
         <div data-work="head">
-          <p className="eyebrow">Areas of Interest</p>
-          <h2 id="work-title" className="t-h2 mt-4">
+          <h2 id="work-title" className="t-h2">
+            <span className="eyebrow-line mb-4">
+              <span className="eyebrow">Areas of Interest</span>
+            </span>
+            <span className="sr-only">: </span>
             Where my curiosity is heading.
           </h2>
         </div>
@@ -73,8 +76,11 @@ export default function Work() {
         >
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-10">
             <div>
-              <p className="eyebrow">Skills in Progress</p>
-              <h3 className="mt-3 text-[1.25rem] font-bold leading-tight tracking-[-0.025em] sm:text-[1.375rem]">
+              <h3 className="text-[1.25rem] font-bold leading-tight tracking-[-0.025em] sm:text-[1.375rem]">
+                <span className="eyebrow-line mb-3">
+                  <span className="eyebrow">Skills in Progress</span>
+                </span>
+                <span className="sr-only">: </span>
                 Skills I&apos;m building, one concept at a time.
               </h3>
             </div>

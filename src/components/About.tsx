@@ -46,6 +46,9 @@ export default function About() {
           data-about="media"
           className="relative aspect-[4/3] overflow-hidden rounded-[18px] bg-mist md:aspect-auto md:min-h-[24rem]"
         >
+          {/* Not lazy-loaded: phones show a text-only hero, so this photo sits in the
+              first screen there and is the page's LCP element. On desktop it loads at
+              normal (low) image priority behind the preloaded hero portrait. */}
           <picture>
             <source type="image/webp" srcSet="/images/abdullah-about.webp" />
             <img
@@ -53,7 +56,6 @@ export default function About() {
               alt="Abdullah Imdad Lakho standing on a staircase"
               width={720}
               height={960}
-              loading="lazy"
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover object-[50%_26%] grayscale"
             />
@@ -61,8 +63,11 @@ export default function About() {
         </figure>
 
         <div data-about="copy" className="self-center">
-          <p className="eyebrow">About Me</p>
-          <h2 id="about-title" className="t-h2 mt-4">
+          <h2 id="about-title" className="t-h2">
+            <span className="eyebrow-line mb-4">
+              <span className="eyebrow">About Me</span>
+            </span>
+            <span className="sr-only">: </span>
             Building a strong foundation,{" "}
             <span className="relative isolate whitespace-nowrap">
               <span

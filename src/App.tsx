@@ -1,3 +1,4 @@
+import { useLayoutEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -9,6 +10,13 @@ import Footer from "./components/Footer";
 import { SmoothScrollProvider } from "./components/SmoothScroll";
 
 export default function App() {
+  // index.html hides the pre-rendered page for motion users until GSAP has set
+  // its start states. Layout effects run child-first, so by now every section's
+  // useGSAP has run: reveal in the same frame, with no flash of final positions.
+  useLayoutEffect(() => {
+    document.documentElement.classList.remove("intro-pending");
+  }, []);
+
   return (
     <SmoothScrollProvider>
       <a

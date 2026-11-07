@@ -83,6 +83,20 @@
     overflow-x: clip;
   }
 
+  /* Set by an inline script in index.html for motion users only, removed in
+     App.tsx once GSAP has applied its start states. Without JavaScript the class
+     is never added; if scripts fail, the page still appears after 2.5s. */
+  html.intro-pending #root {
+    opacity: 0;
+    animation: intro-fallback 0s linear 2.5s forwards;
+  }
+
+  @keyframes intro-fallback {
+    to {
+      opacity: 1;
+    }
+  }
+
   ::selection {
     background-color: var(--color-lime);
     color: var(--color-ink);
@@ -208,6 +222,37 @@
 
   .on-dark .eyebrow {
     color: #fff;
+  }
+
+  /* Eyebrow placed inside a heading: recreates the 16px / 1.5 line box it has as
+     a standalone paragraph, so moving it into the <h2> changes nothing visually. */
+  .eyebrow-line {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* ---- Oversized footer name ----
+     The text spans the shell: "Abdullah" at weight 800 / -0.06em is 3.905em of
+     ink wide, so 100cqw / 3.92 fills the container with ~0.4% to spare.
+     line-height 0.74 crops ~7% off the bottom of the letters at the page edge. */
+  .footer-mark {
+    container-type: inline-size;
+    overflow: hidden;
+  }
+
+  .footer-word {
+    display: block;
+    width: fit-content;
+    margin-left: -0.01em; /* optical: ink starts flush with the shell edge */
+    font-size: 18vw; /* fallback where container units are unsupported */
+    font-size: clamp(3rem, calc(100cqw / 3.92), 20rem);
+    font-weight: 800;
+    line-height: 0.74;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+    color: var(--color-ink);
+    user-select: none;
   }
 
   /* ---- Buttons ---- */

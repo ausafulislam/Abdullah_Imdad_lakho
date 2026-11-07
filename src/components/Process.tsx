@@ -67,8 +67,11 @@ export default function Process() {
       {/* Phone: heading over a card timeline · tablet: heading beside it · lg: horizontal row · xl: heading left */}
       <div className="shell grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-start md:gap-12 lg:grid-cols-1 xl:grid-cols-[0.9fr_2.1fr] xl:gap-0">
         <div data-learn="head" className="xl:pr-10">
-          <p className="eyebrow">How I Learn</p>
-          <h2 id="learn-title" className="t-h2 mt-4 max-w-[22rem]">
+          <h2 id="learn-title" className="t-h2 max-w-[22rem]">
+            <span className="eyebrow-line mb-4">
+              <span className="eyebrow">How I Learn</span>
+            </span>
+            <span className="sr-only">: </span>
             A simple, honest approach to learning.
           </h2>
         </div>

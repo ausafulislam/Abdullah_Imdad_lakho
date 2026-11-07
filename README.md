@@ -1,9 +1,11 @@
 <div align="center">
 
-# Abdullah Imdad
+<img src="public/favicon.svg" alt="Abdullah Imdad Lakho logo" width="72" />
 
-**BS Artificial Intelligence student at DUET, Karachi** — a single-page personal portfolio
-built with React, TypeScript and Tailwind CSS.
+# Abdullah Imdad Lakho: Portfolio
+
+**BS Artificial Intelligence student at DUET Karachi.** This repository is the source code of his
+personal portfolio website.
 
 [![Live](https://img.shields.io/badge/live-abdullah--imdad--lakho.vercel.app-b7f332?style=flat-square)](https://abdullah-imdad-lakho.vercel.app/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
@@ -11,8 +13,6 @@ built with React, TypeScript and Tailwind CSS.
 [![Vite](https://img.shields.io/badge/Vite-7.3-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
 [![Tailwind](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Vercel](https://img.shields.io/badge/hosted-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com)
-[![Audit](https://img.shields.io/badge/npm_audit-0_vulnerabilities-4CAF50?style=flat-square)](https://github.com/ausafulislam/Abdullah_Imdad_lakho)
-[![License](https://img.shields.io/badge/license-all_rights_reserved-8a8a8a?style=flat-square)](#license)
 
 [**View the site**](https://abdullah-imdad-lakho.vercel.app/) ·
 [**Source**](https://github.com/ausafulislam/Abdullah_Imdad_lakho) ·
@@ -22,202 +22,381 @@ built with React, TypeScript and Tailwind CSS.
 
 ---
 
-## Why this build is unusual
+## Project overview
 
-The whole application compiles into **one self-contained `index.html`** — every byte of
-JavaScript and CSS is inlined (~448 kB, ~146 kB gzipped, including GSAP and Lenis). There is
-no server runtime, no chunk loading, and no `dist/assets/` directory; images, the font and
-icons are plain files copied from `public/`. Drop `dist/` on any static host and it works.
+A single-page portfolio that presents Abdullah's academic journey: who he is, his education, the
+areas he is interested in, the skills he is building, how he learns, his certificates and results,
+and how to get in touch.
 
-## Stack
+It is a fully static site. At build time React renders the page into **one self-contained
+`index.html`**, with all JavaScript and CSS inlined and the page content already in the HTML. It
+needs no server and runs on any static host. In the browser, React takes over that HTML
+(hydration), and GSAP adds subtle animations on top.
 
-| Concern | Choice |
-| --- | --- |
-| UI | [React](https://react.dev) 19.2.6 |
-| Language | [TypeScript](https://www.typescriptlang.org) 5.9.3 (strict) |
-| Build | [Vite](https://vite.dev) 7.3.7 + `vite-plugin-singlefile` |
-| Styling | [Tailwind CSS](https://tailwindcss.com) 4.1.17 (CSS-first) |
-| Motion | [GSAP](https://gsap.com) 3.15 + ScrollTrigger, via `@gsap/react` 2.1 (`useGSAP`) |
-| Smooth scroll | [Lenis](https://github.com/darkroomengineering/lenis) 1.3, driven by GSAP's ticker |
-| Font | Plus Jakarta Sans (variable, self-hosted, SIL OFL) |
-| Icons | [lucide-react](https://lucide.dev) 1.44.0 |
-| Hosting | [Vercel](https://vercel.com) |
+## About the portfolio owner
 
-Tailwind v4 is configured **CSS-first** — there is no `tailwind.config.js`. Design tokens live
-in `@theme` at the top of `src/index.css`.
+**Abdullah Imdad Lakho** (also written Abdullah Imdad or Abdullah Lakho) is a first-semester
+BS Artificial Intelligence student at Dawood University of Engineering and Technology (DUET),
+Karachi, Pakistan.
 
-## Getting started
+- **Education:** BS Artificial Intelligence, DUET (2026 – present); Intermediate, D.J. Sindh
+  Science College (completed); S.S.C.-II, Noor Eastern Collegiate, Nawabshah (2024)
+- **Interests:** artificial intelligence, software development, programming, machine learning,
+  data and analytics, technology
+- **Currently learning:** C programming, AI fundamentals, maths for computing, data-analysis
+  fundamentals and Microsoft Office tools
+- **Achievements:** Certificate of Participation, 15th Maarif Inter-School Maths Olympiad (2019);
+  Certificate of Participation, ICATS English Linguistics Contest 2020; S.S.C.-II Annual
+  Examination 2024, 884/1100, Grade A1
+- **Open to** internships and collaboration
 
-Requires **Node 20.19+ or 22.12+** (Vite 7) and **npm 10+**.
+All of this content lives in `src/data/portfolio.ts`.
 
-```bash
-npm install     # install dependencies
-npm run dev     # dev server on http://localhost:5173
-```
+## Features
 
-```bash
-npx tsc --noEmit   # 1. type-check
-npm run build      # 2. build to dist/
-npm run preview    # 3. serve dist/ as production will
-```
-
-> **`npm run build` does not type-check.** Vite strips types with esbuild, so a type error will
-> not fail the build. Always run `npx tsc --noEmit` first.
-
-| Script | Does |
-| --- | --- |
-| `npm run dev` | Dev server with HMR on `localhost` only |
-| `npm run build` | Bundles to `dist/` |
-| `npm run preview` | Serves the built `dist/` |
-
-## Structure
-
-```
-index.html            # SEO head: meta, Open Graph, JSON-LD, font + hero preloads
-public/
-  404.html            # self-contained 404 (no JS, no external CSS)
-  robots.txt  sitemap.xml  favicon.svg  apple-touch-icon.png
-  llms.txt            # AI-assistant overview
-  llms-full.txt       # AI-assistant extended reference
-  fonts/              # Plus Jakarta Sans variable woff2 + OFL licence
-  images/             # see "Images" below
-src/
-  main.tsx            # entry point, wrapped in ErrorBoundary
-  App.tsx             # section order, smooth-scroll provider
-  index.css           # Tailwind import, @theme tokens, component classes
-  data/portfolio.ts   # <- edit this first
-  hooks/usePortfolio.ts
-  lib/gsap.ts         # GSAP + ScrollTrigger setup, shared reveal presets
-  components/
-    Navbar Hero About Work Process Achievements Contact Footer
-    SmoothScroll ErrorBoundary icons
-```
-
-### Images
-
-| File | Used for |
-| --- | --- |
-| `abdullah-hero-portrait.webp` (+ `-640`) | Hero, tablet and desktop. An AI-generated black-and-white studio portrait, created with Abdullah's own photo (`avatar.jpeg`) as the reference; background removed and the light disc baked in. Phones show a text-only hero and never download it. |
-| `abdullah-about.webp` | About section — his real photo (`avatar.jpeg`), cropped and converted to black and white |
-| `avatar.jpeg` | Original photo; also the `Person` image in the JSON-LD |
-| `og-image.png` | 1200×630 social card |
-| `hero-portrait.png`, `interest-*.svg` | Artwork from the previous design — kept, currently unused |
-
-## Customising
-
-**Start with `src/data/portfolio.ts`** — almost all copy reads from it: profile, hero stats,
-About text and education, Areas of Interest, skill groups, learning steps, achievements and
-contact details. Section headings live in their components.
-
-| Want to change | Edit |
-| --- | --- |
-| Any profile, section or contact content | `src/data/portfolio.ts` |
-| Email, phone, WhatsApp number, LinkedIn | `CONTACT` in `src/data/portfolio.ts` |
-| Colours, type scale, buttons | `@theme` and component classes in `src/index.css` |
-| Animation presets | `src/lib/gsap.ts`; each section's `useGSAP` block |
-| Builder credit | `Footer.tsx` |
+- **Sections:** Hero, About (with an education timeline), Areas of Interest and Skills in
+  Progress, How I Learn, Achievements, Contact, and Footer.
+- **Pre-rendered HTML.** The full page content is in the HTML file, so it is readable without
+  JavaScript (search engines, link previews, assistive technology, slow devices).
+- **Animated hero statistics.** The numbers count up from 0 to 6+, 18+ and 3+ when they come into
+  view.
+- **Oversized footer wordmark.** "Abdullah" set across the full content width, under the logo,
+  navigation and contact links.
+- **Smooth scrolling and navigation.** Lenis smooth scrolling; the navbar marks the current
+  section, and in-page links move keyboard focus to the section they open.
+- **WhatsApp contact form** (no backend, see below).
+- **Accessible:** skip link, one `<h1>`, logical headings, labelled form fields, visible focus
+  styles, `aria-current` in the navigation, alt text on every image, and full support for
+  `prefers-reduced-motion`.
+- **Resilient:** an error boundary shows a recovery screen instead of a blank page, and unknown
+  URLs get a branded `404.html`.
+- **Private by default:** no analytics, cookies, trackers or third-party requests. The font is
+  self-hosted.
 
 ### Contact form
 
-The form has **no backend**. Submitting composes the enquiry and opens
+The form has **no backend**. Submitting it composes the enquiry and opens
 `https://wa.me/923033313312` in a new tab, where the visitor presses send. The site transmits
-nothing itself, and the confirmation panel offers copy-to-clipboard and `mailto:` fallbacks
-for blocked tabs or missing WhatsApp. To use a real form service instead, replace
+nothing itself. The confirmation panel also offers copy-to-clipboard and `mailto:` fallbacks in
+case the tab is blocked or WhatsApp is missing. To use a form service instead, replace
 `handleSubmit` in `src/components/Contact.tsx`.
 
-## SEO
+## Technologies used
 
-Hand-written metadata in `index.html`: canonical URL, Open Graph and Twitter cards, and
-JSON-LD describing a `WebSite` plus a `Person`. Paired with `public/sitemap.xml`,
-`public/robots.txt` and a 1200×630 `og-image.png`.
+| Concern | Choice |
+| --- | --- |
+| UI | [React](https://react.dev) 19.2.6 (pre-rendered with `react-dom/server`, hydrated with `hydrateRoot`) |
+| Language | [TypeScript](https://www.typescriptlang.org) 5.9.3, strict mode |
+| Build | [Vite](https://vite.dev) 7.3.7 + `vite-plugin-singlefile` 2.3.0 |
+| Styling | [Tailwind CSS](https://tailwindcss.com) 4.1.17, CSS-first (no `tailwind.config.js`) |
+| Animation | [GSAP](https://gsap.com) 3.15 + ScrollTrigger, via `@gsap/react` 2.1 (`useGSAP`) |
+| Smooth scrolling | [Lenis](https://github.com/darkroomengineering/lenis) 1.3.27 |
+| Icons | [lucide-react](https://lucide.dev) 1.44.0 |
+| Class names | `clsx` + `tailwind-merge`, combined in `src/utils/cn.ts` |
+| Font | Plus Jakarta Sans (variable, self-hosted, SIL OFL 1.1) |
+| Hosting | [Vercel](https://vercel.com) |
 
-There are also `llms.txt` and `llms-full.txt`, an experimental format that helps AI assistants
-describe the owner accurately. It does **not** affect Google rankings.
+### Design tokens
 
-When changing the domain, update all three: the canonical and `og:url` tags in `index.html`,
-every URL in `sitemap.xml`, and both `llms` files.
-
-**If you replace `og-image.png`, bump the `?v=` query string** on `og:image` and
-`twitter:image` in `index.html`. LinkedIn, Facebook and WhatsApp cache these images for a long
-time and will keep serving the old card otherwise.
-
-## Design system
-
-Minimal and monochrome, with one accent.
+Defined in `@theme` at the top of `src/index.css`. Minimal and monochrome, with one accent.
 
 | Token | Value | Used for |
 | --- | --- | --- |
 | `ink` | `#111111` | Text, dark buttons |
-| `muted` | `#767676` | Secondary text (AA on white) |
+| `muted` | `#767676` | Secondary text (AA contrast on white) |
 | `line` | `#eaeaea` | Borders and dividers |
 | `mist` | `#f4f4f4` | Icon tiles, the hero disc |
-| `lime` | `#b7f332` | Accent only: primary buttons, active nav indicator, small lines — never text on white |
+| `lime` | `#b7f332` | Accent only: primary buttons, active nav indicator, small lines. Never used for text on white |
 | `night` | `#080808` | Contact banner |
 
-Type: **Plus Jakarta Sans** (variable 200–800, self-hosted and preloaded, with a
-metric-matched fallback). Radii: cards 14px, images 18px, banner 24px, buttons fully rounded.
+## Project structure
 
-**Motion.** GSAP + ScrollTrigger run through `useGSAP` (automatic cleanup, StrictMode-safe),
-and Lenis smooth scrolling is driven by GSAP's ticker, so there is a single animation loop.
-Every animation lives inside `gsap.matchMedia()` behind a `prefers-reduced-motion:
-no-preference` query: with reduced motion there is no Lenis and no animation. Nothing is
-hidden by CSS — initial states are set by GSAP at runtime — and only transform and opacity
-animate (no pinning, no scroll-jacking on touch).
+```
+index.html                 # <head>: SEO meta, Open Graph, icons, JSON-LD, preloads, intro guard
+vite.config.ts             # Vite config + the build-time pre-render plugin
+public/                    # copied to dist/ as is
+  logo.svg                 # official logo (vector)
+  favicon.ico favicon.svg apple-touch-icon.png
+  icon-192.png icon-512.png icon-maskable-512.png site.webmanifest
+  robots.txt sitemap.xml   # crawl rules and sitemap
+  llms.txt llms-full.txt   # plain-text summaries for AI assistants
+  404.html                 # self-contained not-found page
+  fonts/                   # Plus Jakarta Sans variable woff2 + OFL licence
+  images/                  # photos, hero portrait, social card (see below)
+src/
+  main.tsx                 # browser entry: hydrates the pre-rendered HTML
+  entry-server.tsx         # build-time entry: renders <App /> to HTML
+  App.tsx                  # section order, skip link, smooth-scroll provider
+  index.css                # Tailwind import, @theme tokens, component classes
+  data/portfolio.ts        # all portfolio content (edit this first)
+  lib/gsap.ts              # GSAP + ScrollTrigger setup and shared reveal presets
+  hooks/usePortfolio.ts    # useMediaQuery, useScrolledPast
+  utils/cn.ts              # class-name helper
+  components/              # Navbar Hero About Work Process Achievements Contact Footer
+                           # SmoothScroll ErrorBoundary icons
+```
 
-## Accessibility and performance
+| Image | Used for |
+| --- | --- |
+| `abdullah-hero-portrait.webp` (+ `-640`) | Hero on tablet and desktop. An AI-generated black-and-white studio portrait, made with Abdullah's own photo (`avatar.jpeg`) as the reference. Phones show a text-only hero and never download it. |
+| `abdullah-about.webp` | About section: his real photo, cropped and converted to black and white |
+| `avatar.jpeg` | Original photo; also the `Person` image in the structured data |
+| `og-image.png` | 1200×630 social preview card |
+| `hero-portrait.png`, `interest-*.svg` | Artwork from the previous design, kept but currently unused |
 
-- One `<h1>`, then a logical `h2` → `h3` hierarchy; nav marks the current section with
-  `aria-current`.
-- On tablet and desktop the hero portrait is the LCP image: preloaded (media-gated
-  `imagesrcset`) with `fetchPriority="high"`, served as 640/960 px WebP. Phones get a
-  text-only hero and download no portrait at all. Below-fold images are lazy and
-  `decoding="async"`.
-- Form inputs use real `<label for>` with native validation, and the WhatsApp confirmation
-  panel is announced via `aria-live`.
-- A render crash shows a styled recovery page instead of a blank screen; an unknown URL shows
-  a branded 404.
+**Where to edit**
 
-## Security
+| To change | Edit |
+| --- | --- |
+| Any profile, section or contact content | `src/data/portfolio.ts` |
+| Section headings | the section's component in `src/components/` |
+| Colours, type, buttons | `@theme` and component classes in `src/index.css` |
+| Animation presets | `src/lib/gsap.ts`, plus each section's `useGSAP` block |
+| Page title, description, structured data | `index.html` |
 
-- The dev server binds to `localhost` only. Do not pass `--host` on an untrusted network.
-- No analytics, tracking, cookies or third-party scripts, and no external resources at all —
-  the font is self-hosted.
-- The contact form posts nowhere; it only builds a `wa.me` link from text the visitor typed.
-- Content was audited for Trojan Source, hidden Unicode and XSS sinks — none found.
-- `npm audit` reports 0 vulnerabilities (101 packages audited). Use `npm ci` in CI to
-  install exactly the locked tree.
+## Getting started
 
-## FAQ
+You need:
 
-**The contact form says "sent" but nothing arrives. Why?**
-It doesn't claim to send. It opens WhatsApp with your message written out, and you press send
-there. The site has no server.
+- **Node.js 20.19+ or 22.12+** (required by Vite 7)
+- **npm** (bundled with Node)
+- **Git**
 
-**Does `llms.txt` improve Google rankings?**
-No. It is an experimental proposal no search engine uses for ranking.
+```bash
+git clone https://github.com/ausafulislam/Abdullah_Imdad_lakho.git
+cd Abdullah_Imdad_lakho
+```
 
-**I broke a link. What should I do?**
-Send it to [abdullah17.imdad@gmail.com](mailto:abdullah17.imdad@gmail.com) and it will be fixed.
+## Installation
 
-## Acknowledgements
+```bash
+npm ci
+```
 
-[Vite](https://vite.dev), [React](https://react.dev), [Tailwind CSS](https://tailwindcss.com),
-[lucide](https://lucide.dev), [GSAP](https://gsap.com),
-[Lenis](https://github.com/darkroomengineering/lenis), and Plus Jakarta Sans (Tokotype,
-SIL Open Font License).
-Built by [Ausaf](https://ausafulislam.vercel.app).
+`npm ci` installs exactly the versions recorded in `package-lock.json`. Use `npm install` only when
+adding or upgrading packages. `npm audit` reported 0 vulnerabilities on 7 November 2026.
 
-## Author
+## Development commands
 
-**Abdullah Imdad** (Abdullah Imdad Lakho) — BS Artificial Intelligence, Dawood University of
-Engineering & Technology, Karachi. Open to internships and collaboration.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Starts the Vite dev server with hot reload at <http://localhost:5173> (localhost only) |
+| `npm run typecheck` | Type-checks the project with TypeScript (`tsc --noEmit`, strict mode) |
+| `npm run build` | Builds the production site into `dist/`, including pre-rendering |
+| `npm run preview` | Serves the built `dist/` folder at <http://localhost:4173> |
+
+- The dev server renders in the browser only, so "View source" in development shows an empty
+  `#root`. That is expected; the production build contains the full HTML.
+- No linter is configured. `npm run typecheck` is the static check: strict mode with
+  `noUnusedLocals` and `noUnusedParameters`.
+
+## Production build
+
+```bash
+npm run typecheck   # 1. Vite strips types without checking them, so check first
+npm run build       # 2. build and pre-render into dist/
+npm run preview     # 3. review the result locally
+```
+
+What `npm run build` does:
+
+1. **Bundles the app.** `vite-plugin-singlefile` inlines all JavaScript and CSS into
+   `dist/index.html`, and files from `public/` are copied alongside it.
+2. **Pre-renders the page.** The `portfolio:prerender` plugin in `vite.config.ts` builds
+   `src/entry-server.tsx` for Node, renders `<App />` to HTML and writes it into
+   `<div id="root">` in `dist/index.html`. It then deletes its temporary `dist-ssr/` folder. If
+   this step fails, the whole build fails, so a page without content is never deployed. No
+   extra dependency is involved.
+3. **Hydrates in the browser.** `src/main.tsx` attaches React to the existing markup with
+   `hydrateRoot` instead of rendering it again.
+
+The output is `dist/index.html` (about 488 kB, or 151 kB gzipped, including the pre-rendered
+markup) plus the public assets. Components must stay safe to render on the server: browser-only
+code (`window`, `document`, GSAP, Lenis) belongs in `useGSAP` or `useEffect`, never in the render
+body.
+
+## Environment variables
+
+None. The site has no API keys or secrets and no `.env` file. The code only reads Vite's
+built-in `import.meta.env.DEV` flag, which exposes GSAP in the browser console during
+development.
+
+## SEO implementation
+
+The setup follows Google's [Search Essentials](https://developers.google.com/search/docs/essentials),
+[SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) and
+[JavaScript SEO basics](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics).
+
+| What | Where |
+| --- | --- |
+| Title, meta description, self-referencing canonical, robots directives, `lang` | `index.html` |
+| Open Graph and Twitter/X card with a 1200×630 image | `index.html`, `public/images/og-image.png` |
+| Favicons and web app manifest, generated from the official logo | `public/favicon.*`, `apple-touch-icon.png`, `icon-*.png`, `site.webmanifest` |
+| Structured data (JSON-LD) | `index.html` |
+| Crawl rules and sitemap | `public/robots.txt`, `public/sitemap.xml` |
+| Pre-rendered content | `vite.config.ts`, `src/entry-server.tsx` |
+
+- **Content in the HTML.** Because the page is pre-rendered, its headings, text, links and image
+  alt text arrive in the first HTML response. Google can render JavaScript, but pre-rendering is
+  faster for visitors and works for every crawler, including link-preview bots that don't run
+  scripts.
+- **Descriptive headings.** One `<h1>` (his name), one `<h2>` per section and `<h3>`/`<h4>` for
+  items. Each section heading includes its label, for example "About Me: Building a strong
+  foundation, one concept at a time."
+- **Structured data.** A single `@graph` with `WebSite`, `ProfilePage` (Google's markup for a
+  page about one person), `Person` and `CollegeOrUniversity`. The `Person` covers his name and
+  alternate names, photo, LinkedIn, email, phone, city, his DUET affiliation, previous schools
+  and the topics he is learning. DUET is identified by its official website and Wikipedia
+  article. The markup describes only what the page shows. Valid markup makes a page *eligible*
+  for rich results; Google decides whether to show them.
+- **Crawl rules.** `robots.txt` lets every crawler access everything, including CSS, JavaScript
+  and images, and points to the sitemap. The sitemap lists the one real URL and the date it last
+  changed.
+- **What is deliberately absent:** a `keywords` meta tag (Google ignores it), hidden text, and
+  keyword repetition. Names and keywords appear only where they read naturally.
+- The title (73 characters) and description (185 characters) are longer than Google typically
+  displays, so results may shorten or rewrite them. The most important words come first.
+
+**Keeping it accurate**
+
+- When content changes, update `dateModified` in the JSON-LD, `<lastmod>` in `sitemap.xml`, and
+  the llms files if any facts changed.
+- When `og-image.png` changes, bump the `?v=` query on `og:image` and `twitter:image`. LinkedIn,
+  WhatsApp and Facebook cache preview images for a long time.
+- If the domain ever changes, update the canonical, `og:url`, `og:image`, `twitter:image` and
+  every JSON-LD URL in `index.html`, the `Sitemap:` line in `robots.txt`, the `<loc>` in
+  `sitemap.xml`, and the URLs in both llms files.
+
+**After deploying (owner steps)**
+
+1. [Google Search Console](https://search.google.com/search-console): verify the site, submit
+   `sitemap.xml` and use URL Inspection to request indexing.
+2. Test the structured data with the [Rich Results Test](https://search.google.com/test/rich-results)
+   and the [Schema Markup Validator](https://validator.schema.org/).
+3. Check real-device performance with [PageSpeed Insights](https://pagespeed.web.dev/).
+4. Add the site to [Bing Webmaster Tools](https://www.bing.com/webmasters), which can import it
+   from Search Console.
+
+No setup can guarantee rankings, indexing or rich results. Search engines decide those.
+
+## GEO/AEO implementation
+
+Generative engine optimisation (GEO) and answer engine optimisation (AEO) aim to help AI
+assistants and answer features describe Abdullah correctly. Google's
+[guidance on AI features](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
+says AI Overviews and AI Mode rely on the same systems as regular Search: there is no special
+markup or file to add. The work here is therefore about clarity and consistency.
+
+- **One consistent identity.** Name, title ("BS Artificial Intelligence student at DUET
+  Karachi"), university, location and contact details match across the visible page, the
+  metadata, the JSON-LD and the llms files.
+- **Plain factual statements on the page:** who he is, what and where he studies, his stage
+  (first semester), his interests, the skills he is learning (presented as in progress),
+  achievements with dates and details, and that he is open to internships and collaboration.
+- **Clear entity links.** `sameAs` points to his LinkedIn, and DUET is identified by its official
+  website and Wikipedia article.
+- **Readable without JavaScript or motion.** The content is pre-rendered, and the animations
+  only enhance it. They are switched off for reduced motion.
+- **`llms.txt` and `llms-full.txt`** follow the [llmstxt.org](https://llmstxt.org/) format: a
+  short Markdown summary and an extended reference, linked from the page head with
+  `rel="describedby"`. Some AI tools read these files. **Google Search does not use `llms.txt`**,
+  so treat it as a convenience for other tools, not a ranking factor.
+- **No FAQ block.** Every answer it would give (who he is, what and where he studies, his
+  interests, his availability) is already stated in the visible sections. Repeating them would
+  add text only for search engines.
+- **Honesty guardrails.** There are no invented roles, projects or awards. The olympiad and
+  contest certificates are labelled as participation, and the llms files ask AI tools not to
+  present him as a professional.
+
+To see how the site appears in Google's AI features, use Search Console's
+[Generative AI performance report](https://support.google.com/webmasters/answer/16984139).
+
+## GSAP and ScrollTrigger usage
+
+- **One setup point.** `src/lib/gsap.ts` registers ScrollTrigger and `useGSAP` once, and
+  components import GSAP from there. It also holds the shared reveal presets, including a
+  `ScrollTrigger.batch` helper for staggered cards.
+- **One pattern.** Every animation lives in `useGSAP`, which cleans up automatically and is safe
+  under StrictMode, inside `gsap.matchMedia()` with `(prefers-reduced-motion: no-preference)`.
+  With reduced motion nothing animates and everything shows in its final state.
+- **Light by design.** Only transform and opacity animate. There is no pinning and no
+  scroll-jacking, and section reveals fire once.
+- **Hero intro.** A short timeline reveals the badge, headline, text, buttons and portrait.
+- **Hero statistics count-up.** The final numbers are in the pre-rendered HTML. On load, the
+  script sets them to 0, then tweens a plain numeric object and writes the rounded value in
+  `onUpdate` (1.8 s, `power2.out`, 0.12 s stagger). Counting starts once the intro has revealed
+  the stats *and* they are in view (ScrollTrigger, `once: true`). If the visitor scrolls past
+  without seeing them, they still finish, so they never stay at 0. Cleanup restores the final
+  values.
+- **Footer wordmark.** "Abdullah" rises slightly (`yPercent: 28` → 0) and fades in once, when it
+  enters the viewport.
+- **No flash on load.** Pre-rendered content would otherwise be visible for a moment before
+  GSAP sets the intro's start states. An inline script in `index.html` adds `intro-pending` to
+  `<html>` (only for visitors who allow motion), CSS hides `#root` while it is set, and
+  `App.tsx` removes it as soon as GSAP is ready. If scripts fail, a CSS animation reveals the
+  page after 2.5 s. Without JavaScript the class is never added.
+
+## Lenis smooth scrolling
+
+`src/components/SmoothScroll.tsx` owns the page's single Lenis instance:
+
+- Lenis runs with `lerp: 0.1` and `autoRaf: false`. It is advanced from `gsap.ticker`, so GSAP
+  and Lenis share one animation loop. Every Lenis scroll event calls `ScrollTrigger.update`, and
+  `lagSmoothing(0)` keeps the two in sync.
+- It is created only when the visitor allows motion. With reduced motion the page uses native
+  scrolling with instant jumps.
+- It handles all in-page links (`a[href^="#"]`). They scroll smoothly (1.15 s, ease-out expo),
+  stop below the fixed navbar thanks to `scroll-padding-top`, update the URL, and move keyboard
+  focus to the target section.
+- Deep links such as `/#contact` jump straight to their section once the fonts have loaded.
+- `setLocked` freezes scrolling while the mobile menu is open.
+- Lenis's recommended stylesheet, `lenis/dist/lenis.css`, is imported.
+
+## Responsive design
+
+- Mobile-first Tailwind with the default breakpoints (`sm` 640 px, `md` 768 px, `lg` 1024 px,
+  `xl` 1280 px). The content width is `min(100% − 2 × gutter, 75rem)`.
+- **Phones** get a text-only hero, and the portrait is never downloaded: the `<picture>` source
+  and its preload are both media-gated. The menu manages focus and closes with Escape, and
+  "Let's Talk" stays visible in the header.
+- Type scales fluidly with `clamp()`. The footer wordmark uses container query units (`cqw`) to
+  fill the content width exactly at any size, with no horizontal overflow.
+- Safe-area insets are respected on notched phones.
+- **Performance:** the font is preloaded, self-hosted and a single variable file. Images are WebP.
+  On tablet and desktop the hero portrait (640/960 px) is preloaded with high priority. On phones
+  the About photo is the first image on screen, so it is not lazy-loaded. Every image declares
+  its width and height, so the layout doesn't shift.
+- Tested at 360, 390, 480, 768, 1024, 1280, 1440 and 1920 px wide, with and without reduced
+  motion.
+
+## Deployment
+
+The production site is <https://abdullah-imdad-lakho.vercel.app/>, hosted on Vercel.
+
+- Vercel detects Vite automatically: the build command is `npm run build` and the output
+  directory is `dist`. Pre-rendering is part of `vite build`, so no extra configuration or
+  `vercel.json` is needed.
+- Use Node.js 20.x or 22.x in the project settings (Vite needs 20.19+ or 22.12+).
+- Vercel serves `dist/404.html` for unknown URLs.
+- Any other static host works too: run `npm run build` and upload the `dist/` folder.
+
+## Contact and social links
 
 - Website: <https://abdullah-imdad-lakho.vercel.app/>
 - Email: [abdullah17.imdad@gmail.com](mailto:abdullah17.imdad@gmail.com)
+- Phone and WhatsApp: [+92 303 3313312](https://wa.me/923033313312)
 - LinkedIn: [linkedin.com/in/abdullah-imdad-lakho-150347364](https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/)
-- Phone: +92-303-3313312
 
 ## License
 
-Personal portfolio. **All rights reserved** by the author — not published under an open-source
-licence.
+This is a personal portfolio. **All rights reserved** by Abdullah Imdad Lakho; the code and
+content are not published under an open-source licence. His name, photos, logo and written
+content may not be reused without permission.
+
+Third-party software keeps its own licence: Plus Jakarta Sans is under the SIL Open Font
+License 1.1 (`public/fonts/OFL.txt`), and each npm package is under the licence in its own
+package. Built with [Vite](https://vite.dev), [React](https://react.dev),
+[Tailwind CSS](https://tailwindcss.com), [GSAP](https://gsap.com),
+[Lenis](https://github.com/darkroomengineering/lenis) and [lucide](https://lucide.dev).
+
+Website built by [Ausaf](https://ausafulislam.vercel.app).

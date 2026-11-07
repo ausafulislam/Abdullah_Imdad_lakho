@@ -4,7 +4,6 @@ import { useActiveSection, useScrolledPast } from "../hooks/usePortfolio";
 import { CONTACT, NAV_ALIAS, NAV_LINKS, SPY_SECTIONS } from "../data/portfolio";
 import { gsap, useGSAP, MOTION_OK } from "../lib/gsap";
 import { useSmoothScroll } from "./SmoothScroll";
-import { Logo } from "./icons";
 import { cn } from "../utils/cn";
 
 export default function Navbar() {
@@ -92,12 +91,14 @@ export default function Navbar() {
         aria-label="Primary"
         className="shell grid h-[var(--header-h)] grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]"
       >
-        <a
-          href="#top"
-          aria-label="Abdullah Imdad Lakho, back to top"
-          className="-m-2 inline-flex w-fit items-center rounded-md p-2 text-ink"
-        >
-          <Logo className="h-[1.4rem] w-auto md:h-6" />
+        <a href="#top" className="-m-2 inline-flex w-fit items-center rounded-md p-2">
+          <img
+            src="/logo.svg"
+            alt="Abdullah Imdad Lakho, home"
+            width={252}
+            height={183}
+            className="h-[1.4rem] w-auto md:h-6"
+          />
         </a>
 
         {/* Desktop links */}

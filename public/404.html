@@ -10,7 +10,9 @@
     />
     <!-- A 404 must never be indexed, and must not compete with the real page. -->
     <meta name="robots" content="noindex, follow" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light" />
 
@@ -71,8 +73,9 @@
         border-radius: 0.5rem;
       }
       .logo svg {
-        width: 2.5rem;
-        height: auto;
+        width: auto;
+        height: 1.75rem;
+        aspect-ratio: 251.55 / 182.57;
         display: block;
       }
       .code {
@@ -187,9 +190,7 @@
   <body>
     <main class="wrap">
       <a class="logo" href="/" aria-label="Abdullah Imdad Lakho, home">
-        <svg viewBox="0 0 40 28" fill="currentColor" aria-hidden="true" focusable="false">
-          <path d="M0 28 11.2 0H40v3.8h-4V28h-4.6V3.8H20.7L28.2 28h-5.5L15.2 3.8 5.5 28Z" />
-        </svg>
+        <svg viewBox="0 0 251.55 182.57" aria-hidden="true" focusable="false"><path fill="#000" d="M0 182.57L64.06 20.39C70.2 4.85 85.16 0.05 100.95 0.05C116.55 0.05 131.21 5.31 137.03 20.67L198.48 182.57L163.64 182.57L108.75 37.18C107.54 33.96 103.8 32.05 100.45 32.05C96.9 32.05 93.03 34.26 91.74 37.54L34.67 182.57ZM220.17 0L251.55 0L251.55 182.57L220.17 182.57Z" /></svg>
       </a>
 
       <p class="code" aria-hidden="true">404</p>

@@ -1,8 +1,10 @@
+import { useRef } from "react";
 import { ArrowUp, ExternalLink, Mail, Phone } from "lucide-react";
 import { CONTACT, MAILTO_URL, NAV_LINKS, PROFILE } from "../data/portfolio";
 import { useScrolledPast } from "../hooks/usePortfolio";
+import { gsap, useGSAP, MOTION_OK } from "../lib/gsap";
 import { useSmoothScroll } from "./SmoothScroll";
-import { LinkedInIcon, Logo } from "./icons";
+import { LinkedInIcon } from "./icons";
 import { cn } from "../utils/cn";
 
 const SOCIALS = [
@@ -14,14 +16,32 @@ const SOCIALS = [
 export default function Footer() {
   const showBackToTop = useScrolledPast(700);
   const { scrollTo } = useSmoothScroll();
+  const footerRef = useRef<HTMLElement>(null);
+
+  // The oversized name rises out of the bottom edge once (it stays fully visible
+  // without JavaScript and for reduced motion).
+  useGSAP(
+    () => {
+      gsap.matchMedia().add(MOTION_OK, () => {
+        gsap.from("[data-footer='word']", {
+          yPercent: 28,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: { trigger: "[data-footer='mark']", start: "top bottom", once: true },
+        });
+      });
+    },
+    { scope: footerRef },
+  );
 
   return (
     <>
-      <footer className="border-t border-line">
-        <div className="shell pb-[calc(2rem+env(safe-area-inset-bottom,0px))] pt-10 sm:pt-12">
+      <footer ref={footerRef} className="border-t border-line pb-[env(safe-area-inset-bottom,0px)]">
+        <div className="shell pt-10 sm:pt-12">
           <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
             <a href="#top" className="flex w-fit items-center gap-4 rounded-md">
-              <Logo className="h-7 w-auto text-ink" />
+              <img src="/logo.svg" alt="" width={252} height={183} className="h-7 w-auto" />
               <span>
                 <span className="block text-base font-semibold tracking-[-0.015em]">{PROFILE.name}</span>
                 <span className="block text-[0.8125rem] text-muted">{PROFILE.title}</span>
@@ -58,7 +78,8 @@ export default function Footer() {
           </div>
 
           <div className="mt-8 flex flex-col gap-4 border-t border-line pt-6 text-[0.8125rem] sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-muted">
+            {/* The year is rendered at build time and refreshed on hydration. */}
+            <p className="text-muted" suppressHydrationWarning>
               &copy; {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
             </p>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -78,6 +99,14 @@ export default function Footer() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Oversized first name, bottom-aligned and slightly cropped by the page edge.
+            Decorative: the full name is already in the footer above. */}
+        <div data-footer="mark" aria-hidden="true" className="footer-mark shell mt-10 sm:mt-14">
+          <span data-footer="word" className="footer-word">
+            {PROFILE.firstName}
+          </span>
         </div>
       </footer>
 

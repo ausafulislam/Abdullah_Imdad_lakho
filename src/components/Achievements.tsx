@@ -26,8 +26,11 @@ export default function Achievements() {
     <section ref={root} id="achievements" aria-labelledby="achievements-title" className="section-y">
       <div className="shell">
         <div data-ach="head">
-          <p className="eyebrow">Achievements</p>
-          <h2 id="achievements-title" className="t-h2 mt-4">
+          <h2 id="achievements-title" className="t-h2">
+            <span className="eyebrow-line mb-4">
+              <span className="eyebrow">Achievements</span>
+            </span>
+            <span className="sr-only">: </span>
             Certifications and academic results.
           </h2>
         </div>

@@ -1,17 +1,5 @@
 type IconProps = { className?: string };
 
-/**
- * "AT" monogram (the A drawn as a Λ whose left stroke runs into the T's bar).
- * Decorative: pair it with visible or aria-label text.
- */
-export function Logo({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 40 28" fill="currentColor" aria-hidden="true" focusable="false" className={className}>
-      <path d="M0 28 11.2 0H40v3.8h-4V28h-4.6V3.8H20.7L28.2 28h-5.5L15.2 3.8 5.5 28Z" />
-    </svg>
-  );
-}
-
 /** LinkedIn mark in the same 24px / 1.6 stroke style as the lucide icons. */
 export function LinkedInIcon({ className }: IconProps) {
   return (
