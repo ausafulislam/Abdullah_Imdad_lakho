@@ -1,15 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="14" fill="#14120f"/>
-  <g stroke="#e2431f" stroke-width="2.5" stroke-linecap="round" opacity="0.9">
-    <line x1="20" y1="20" x2="32" y2="32"/>
-    <line x1="44" y1="20" x2="32" y2="32"/>
-    <line x1="20" y1="44" x2="32" y2="32"/>
-    <line x1="44" y1="44" x2="32" y2="32"/>
-    <line x1="20" y1="20" x2="44" y2="44" opacity="0.35"/>
-  </g>
-  <circle cx="32" cy="32" r="7" fill="#d9a441"/>
-  <circle cx="20" cy="20" r="4.5" fill="#f6f1e7"/>
-  <circle cx="44" cy="20" r="4.5" fill="#f6f1e7"/>
-  <circle cx="20" cy="44" r="4.5" fill="#7c8b6f"/>
-  <circle cx="44" cy="44" r="4.5" fill="#7c8b6f"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><rect width="64" height="64" rx="12" fill="#fff"/><path fill="#000" transform="translate(6.4 13.42) scale(0.204)" d="M0 182.57L64.06 20.39C70.2 4.85 85.16 0.05 100.95 0.05C116.55 0.05 131.21 5.31 137.03 20.67L198.48 182.57L163.64 182.57L108.75 37.18C107.54 33.96 103.8 32.05 100.45 32.05C96.9 32.05 93.03 34.26 91.74 37.54L34.67 182.57ZM220.17 0L251.55 0L251.55 182.57L220.17 182.57Z"/></svg>

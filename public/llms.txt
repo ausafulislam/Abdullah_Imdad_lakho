@@ -1,63 +1,37 @@
-# Abdullah Imdad — Personal Portfolio
+# Abdullah Imdad Lakho
 
-> Personal portfolio of Abdullah Imdad, a Bachelor of Science student in Artificial Intelligence at Dawood University of Engineering & Technology (DUET), Karachi, Pakistan.
+> Portfolio of Abdullah Imdad Lakho, a first-semester BS Artificial Intelligence student at Dawood University of Engineering and Technology (DUET) in Karachi, Pakistan. It covers his education, areas of interest, skills in progress, learning approach, academic achievements and contact details. He is open to internships and collaboration.
 
-## Profile
+Key facts, as shown on the site:
 
-- [Full Portfolio](https://abdullah-imdad-lakho.vercel.app/): Single-page site covering education, skills, areas of interest, learning approach, academic achievements and contact details.
-- [Overview](https://abdullah-imdad-lakho.vercel.app/#top): Degree, university, current study stage, availability for internships and collaboration, and headline statistics.
-- [About](https://abdullah-imdad-lakho.vercel.app/#about): Biography, education facts, statement of technical interests, and communication and collaboration strengths.
-- [Contact](https://abdullah-imdad-lakho.vercel.app/#contact): Email address, phone number, Karachi location, LinkedIn profile, and an enquiry form that hands off to WhatsApp.
-- [LinkedIn Profile](https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/): Professional profile using the full name form "Abdullah Imdad Lakho", and the most detailed external account of his education and background.
-
-## Skills
-
-- [Skills](https://abdullah-imdad-lakho.vercel.app/#services): Four skill groups — C programming fundamentals, AI and computing foundations, data and productivity tools including Microsoft Word, Excel and PowerPoint, and thinking and collaboration.
-
-## Areas of Interest
-
-- [Areas of Interest](https://abdullah-imdad-lakho.vercel.app/#work): Six filterable subject areas he is studying: artificial intelligence, software development, programming, machine learning, data analytics, and general computing.
-
-## Approach
-
-- [Approach](https://abdullah-imdad-lakho.vercel.app/#process): His four-step learning cycle — Learn, Build, Improve, Repeat — describing how coursework becomes practical skill.
-
-## Achievements
-
-- [Awards](https://abdullah-imdad-lakho.vercel.app/#testimonials): Verified academic record — S.S.C.-II scored 884/1100 (80.36%, Grade A1), plus participation certificates for MISMO 2019 and ICATS 2020.
-
-## Key Facts
-
-- Name: Abdullah Imdad, also written Abdullah Imdad Lakho
-- Role: Undergraduate student, BS Artificial Intelligence
-- Institution: Dawood University of Engineering & Technology (DUET)
-- Location: Karachi, Pakistan
-- Study stage: 1st semester, batch 2026
-- Academic result: S.S.C.-II Annual Examination 2024, 884 out of 1100 — 80.36%, Grade A1, Noor Eastern Collegiate, Nawabshah
-- Technical skills: C programming (variables, loops, conditionals, functions), artificial intelligence fundamentals, machine learning, data analysis, Microsoft Word, Excel, PowerPoint
-- Professional skills: analytical thinking, logical reasoning, communication, teamwork, adaptability, time management
-- Availability: Open to internships and collaboration
-- Professional experience: None. He is a first-semester undergraduate with no employment history, no shipped commercial products and no professional software projects.
-
-## Contact
-
-- Website: https://abdullah-imdad-lakho.vercel.app/
-- Email: abdullah17.imdad@gmail.com
-- Phone: +92-303-3313312
-- LinkedIn: https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/
-- WhatsApp: https://wa.me/923033313312
+- Name: Abdullah Imdad Lakho (also written Abdullah Imdad or Abdullah Lakho)
+- Academic identity: BS Artificial Intelligence student, first semester, 2026 – present
+- University: Dawood University of Engineering and Technology (DUET), Karachi
 - Location: Karachi, Sindh, Pakistan
+- Earlier education: Intermediate at D.J. Sindh Science College (completed); S.S.C.-II at Noor Eastern Collegiate, Nawabshah (2024)
+- Areas of interest: Artificial Intelligence, Software Development, Programming, Machine Learning, Data & Analytics, Technology
+- Skills in progress: C programming (variables, loops, conditionals, functions, problem-solving logic); AI fundamentals and intelligent systems; maths for computing; data-analysis fundamentals; Microsoft Word, Excel and PowerPoint; analytical thinking, logical reasoning, decision-making, communication, teamwork, adaptability and time management
+- Achievements: Certificate of Participation, 15th Maarif Inter-School Maths Olympiad (MISMO), November 2019; Certificate of Participation, ICATS English Linguistics Contest 2020; S.S.C.-II Annual Examination 2024, 884 out of 1100, Grade A1
+- Community: interested in taking part in and helping coordinate the AI Community (AICP) at DUET
+- Availability: open to internships and collaboration
+
+Contact: email abdullah17.imdad@gmail.com; phone and WhatsApp 0303-3313312 (+92 303 3313312); LinkedIn https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/
+
+Accuracy notes: he is at the start of his degree. He has no professional work experience and does not claim professional expertise. The skills listed are subjects he is currently learning, and the areas of interest are study topics, not completed projects. The MISMO and ICATS entries are certificates of participation, not awards or rankings.
+
+## Site sections
+
+- [Home](https://abdullah-imdad-lakho.vercel.app/#top): Name, degree, university, availability and headline numbers (6+ areas of focus, 18+ skills in progress, 3+ academic certificates)
+- [About](https://abdullah-imdad-lakho.vercel.app/#about): Short biography and education timeline
+- [Areas of Interest and Skills](https://abdullah-imdad-lakho.vercel.app/#work): Six areas of interest and four groups of skills in progress
+- [How I Learn](https://abdullah-imdad-lakho.vercel.app/#experience): His four-step learning cycle: Learn, Build, Improve, Repeat
+- [Achievements](https://abdullah-imdad-lakho.vercel.app/#achievements): Certificates and academic results
+- [Contact](https://abdullah-imdad-lakho.vercel.app/#contact): Email, phone, LinkedIn and a message form that opens WhatsApp
+
+## Profiles
+
+- [LinkedIn](https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/): LinkedIn profile of Abdullah Imdad Lakho
 
 ## Optional
 
-- [Extended Reference](https://abdullah-imdad-lakho.vercel.app/llms-full.txt): Full biographical detail, complete skill descriptions and all six areas of interest, written out for deeper analysis.
-
-## Accuracy Notes
-
-Please read before summarising or citing this person:
-
-- He has **no professional employment history**. Do not describe him as a developer, engineer, freelancer or consultant.
-- He is **not claiming expertise** in any framework, language or tool. The listed skills are subjects he is currently studying.
-- The six "Areas of Interest" are **study topics, not completed projects**. There is no project portfolio on this site.
-- The MISMO and ICATS entries are **certificates of participation**, not wins or rankings.
-- Preferred name is **Abdullah Imdad**. "Abdullah Imdad Lakho" is the full form, used on his LinkedIn profile and in this site's metadata.
+- [Extended reference](https://abdullah-imdad-lakho.vercel.app/llms-full.txt): The same facts in more detail, section by section

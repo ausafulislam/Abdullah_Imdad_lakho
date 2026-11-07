@@ -1,148 +1,208 @@
-import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
-import { useBodyLock, useScrollSpy } from "../hooks/usePortfolio";
-
-const links = [
-  { href: "#work", label: "Interest", id: "work" },
-  { href: "#about", label: "About", id: "about" },
-  { href: "#services", label: "Skills", id: "services" },
-  { href: "#process", label: "Approach", id: "process" },
-  { href: "#testimonials", label: "Awards", id: "testimonials" },
-  { href: "#contact", label: "Contact", id: "contact" },
-];
-
-const IDS = links.map((l) => l.id);
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { ArrowRight, Menu, X } from "lucide-react";
+import { useActiveSection, useScrolledPast } from "../hooks/usePortfolio";
+import { CONTACT, NAV_ALIAS, NAV_LINKS, SPY_SECTIONS } from "../data/portfolio";
+import { gsap, useGSAP, MOTION_OK } from "../lib/gsap";
+import { useSmoothScroll } from "./SmoothScroll";
+import { cn } from "../utils/cn";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const active = useScrollSpy(IDS);
-  useBodyLock(open);
+  const scrolled = useScrolledPast(8);
+  const spied = useActiveSection(SPY_SECTIONS);
+  const active = NAV_ALIAS[spied] ?? spied;
+  const { setLocked } = useSmoothScroll();
+
+  const navRef = useRef<HTMLElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
+  const menuId = useId();
+
+  // ---- Entrance (first beat of the hero sequence) ----
+  useGSAP(
+    () => {
+      gsap.matchMedia().add(MOTION_OK, () => {
+        gsap.from(navRef.current, { y: -14, opacity: 0, duration: 0.7, delay: 0.1, ease: "power2.out" });
+      });
+    },
+    { scope: navRef },
+  );
+
+  // ---- Sliding active indicator ----
+  const [indicator, setIndicator] = useState<{ x: number; w: number } | null>(null);
+  const hasPositioned = useRef(false);
+
+  useLayoutEffect(() => {
+    const update = () => {
+      const link = listRef.current?.querySelector<HTMLElement>(`[data-nav-id="${active}"]`);
+      if (!link || link.offsetWidth === 0) return; // hidden on mobile
+      setIndicator({ x: link.offsetLeft, w: link.offsetWidth });
+    };
+    update();
+    let cancelled = false;
+    document.fonts?.ready.then(() => !cancelled && update());
+    window.addEventListener("resize", update);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("resize", update);
+    };
+  }, [active]);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 16);
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(h > 0 ? (window.scrollY / h) * 100 : 0);
+    if (indicator) hasPositioned.current = true;
+  }, [indicator]);
+
+  // ---- Mobile menu: scroll lock, Escape, focus, auto-close on desktop ----
+  useEffect(() => {
+    setLocked(open);
+    if (!open) return;
+
+    firstMobileLinkRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    const desktop = window.matchMedia("(min-width: 48rem)");
+    const onBreakpoint = () => desktop.matches && setOpen(false);
+
+    document.addEventListener("keydown", onKey);
+    desktop.addEventListener("change", onBreakpoint);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      document.removeEventListener("keydown", onKey);
+      desktop.removeEventListener("change", onBreakpoint);
+      setLocked(false);
     };
-  }, []);
+  }, [open, setLocked]);
+
+  const close = () => setOpen(false);
+  const solid = scrolled || open;
 
   return (
-    <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled || open
-            ? "bg-cream/85 backdrop-blur-xl shadow-[0_1px_0_rgba(20,18,15,0.10)]"
-            : "bg-transparent"
-        }`}
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-300",
+        solid ? "border-line bg-white" : "border-transparent bg-transparent",
+      )}
+    >
+      <nav
+        ref={navRef}
+        aria-label="Primary"
+        className="shell grid h-[var(--header-h)] grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]"
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 md:px-10 md:py-5">
-          <a
-            href="#top"
-            className="font-display text-lg font-semibold tracking-tight text-ink sm:text-xl"
-          >
-            ABDULLAH<span className="text-coral">.</span>IMDAD
-          </a>
-
-          {/* Desktop / large tablet nav */}
-          <ul className="hidden items-center gap-6 lg:flex xl:gap-9">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className={`relative font-display text-[0.8rem] font-medium uppercase tracking-wide transition-colors hover:text-coral ${
-                    active === l.id ? "text-coral" : "text-ink/70"
-                  }`}
-                >
-                  {l.label}
-                  <span
-                    className={`absolute -bottom-1.5 left-0 h-[2px] rounded-full bg-coral transition-all duration-300 ${
-                      active === l.id ? "w-full" : "w-0"
-                    }`}
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <a
-            href="#contact"
-            className="group hidden items-center gap-1.5 rounded-full border border-ink/15 bg-ink px-5 py-2.5 font-display text-sm font-medium text-cream transition-colors hover:bg-coral hover:text-ink sm:inline-flex"
-          >
-            Let's talk
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-
-          <button
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-ink transition-colors active:bg-ink/5 sm:hidden"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </nav>
-
-        {/* Scroll progress */}
-        <div className="h-[3px] w-full bg-transparent">
-          <div
-            className="h-full bg-coral transition-[width] duration-150 ease-out"
-            style={{ width: `${progress}%` }}
+        <a href="#top" className="-m-2 inline-flex w-fit items-center rounded-md p-2">
+          <img
+            src="/logo.svg"
+            alt="Abdullah Imdad Lakho, home"
+            width={252}
+            height={183}
+            className="h-[1.4rem] w-auto md:h-6"
           />
-        </div>
-      </header>
+        </a>
 
-      {/* Mobile drawer */}
-      <div
-        className={`fixed inset-0 z-40 sm:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
-        aria-hidden={!open}
-      >
-        <div
-          onClick={() => setOpen(false)}
-          className={`absolute inset-0 bg-ink/40 backdrop-blur-sm transition-opacity duration-300 ${
-            open ? "opacity-100" : "opacity-0"
-          }`}
-        />
-        <div
-          className={`safe-b absolute inset-x-0 top-0 rounded-b-[2rem] bg-cream px-6 pb-10 pt-24 shadow-2xl transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            open ? "translate-y-0" : "-translate-y-full"
-          }`}
-        >
-          <ul className="flex flex-col">
-            {links.map((l, i) => (
-              <li key={l.href}>
+        {/* Desktop links */}
+        <ul ref={listRef} className="relative hidden items-center md:flex">
+          {NAV_LINKS.map((link) => {
+            const isActive = active === link.id;
+            return (
+              <li key={link.id}>
                 <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
-                  className={`flex items-center justify-between border-b border-ink/10 py-4 font-display text-2xl font-medium transition-all duration-500 ${
-                    active === l.id ? "text-coral" : "text-ink"
-                  } ${open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
+                  href={link.href}
+                  data-nav-id={link.id}
+                  aria-current={isActive ? "location" : undefined}
+                  className={cn(
+                    "block rounded-md px-3 py-2.5 text-sm font-medium transition-colors lg:px-4",
+                    isActive ? "text-ink" : "text-[#4d4d4d] hover:text-ink",
+                  )}
                 >
-                  {l.label}
-                  <ArrowUpRight className="h-5 w-5 text-ink/30" />
+                  {link.label}
                 </a>
               </li>
-            ))}
+            );
+          })}
+          {indicator && (
+            <span
+              aria-hidden="true"
+              className={cn(
+                "pointer-events-none absolute bottom-0 left-0 h-[2px] rounded-full bg-lime",
+                hasPositioned.current && "transition-[transform,width] duration-500 ease-[var(--ease-out-expo)]",
+              )}
+              style={{ width: indicator.w, transform: `translateX(${indicator.x}px)` }}
+            />
+          )}
+        </ul>
+
+        <div className="flex items-center justify-end gap-2">
+          <a href="#contact" onClick={close} className="btn btn-dark btn-sm">
+            Let&apos;s Talk
+            <ArrowRight className="btn-arrow h-4 w-4" aria-hidden="true" />
+          </a>
+          <button
+            ref={toggleRef}
+            type="button"
+            aria-expanded={open}
+            aria-controls={menuId}
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((v) => !v)}
+            className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-ink transition-colors hover:bg-mist md:hidden"
+          >
+            {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile menu */}
+      <div
+        className={cn(
+          "fixed inset-x-0 bottom-0 top-[var(--header-h)] bg-black/25 transition-opacity duration-300 md:hidden",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
+        aria-hidden="true"
+        onClick={close}
+      />
+      <div
+        id={menuId}
+        className={cn(
+          "absolute inset-x-0 top-full border-b border-line bg-white shadow-[0_12px_24px_-12px_rgb(0_0_0/0.12)] duration-300 ease-[var(--ease-out-expo)] md:hidden",
+          // Opening doesn't transition `visibility`, so the panel is focusable at once
+          // (the first link receives focus); closing keeps it visible until the fade ends.
+          open
+            ? "visible translate-y-0 opacity-100 transition-[opacity,transform]"
+            : "invisible -translate-y-2 opacity-0 transition-[opacity,transform,visibility]",
+        )}
+      >
+        <div className="shell pb-6 pt-2">
+          <ul>
+            {NAV_LINKS.map((link, i) => {
+              const isActive = active === link.id;
+              return (
+                <li key={link.id} className="border-b border-line">
+                  <a
+                    ref={i === 0 ? firstMobileLinkRef : undefined}
+                    href={link.href}
+                    onClick={close}
+                    aria-current={isActive ? "location" : undefined}
+                    className="flex items-center justify-between py-3.5 text-base font-semibold text-ink"
+                  >
+                    {link.label}
+                    <span
+                      aria-hidden="true"
+                      className={cn("h-2 w-2 rounded-full", isActive ? "bg-lime" : "bg-transparent")}
+                    />
+                  </a>
+                </li>
+              );
+            })}
           </ul>
           <a
-            href="#contact"
-            onClick={() => setOpen(false)}
-            className="mt-8 flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-4 font-display text-base font-medium text-cream"
+            href={`mailto:${CONTACT.email}`}
+            className="mt-5 block text-center text-sm text-muted transition-colors hover:text-ink"
           >
-            Start a project <ArrowUpRight className="h-4 w-4" />
+            {CONTACT.email}
           </a>
-          <p className="mt-6 text-center text-sm text-ink/50">abdullah17.imdad@gmail.com</p>
         </div>
       </div>
-    </>
+    </header>
   );
 }

@@ -1,55 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-/** Highlights the nav link for the section currently in view. */
-export function useScrollSpy(ids: string[], offset = 140) {
-  const [active, setActive] = useState(ids[0] ?? "");
-
-  useEffect(() => {
-    const onScroll = () => {
-      let current = ids[0] ?? "";
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top - offset <= 0) current = id;
-      }
-      setActive(current);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [ids, offset]);
-
-  return active;
-}
-
-/** Adds .is-visible to elements with .reveal as they enter the viewport. */
-export function useRevealOnScroll() {
-  useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-    if (!("IntersectionObserver" in window)) {
-      els.forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -8% 0px" },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-}
-
-/** Simple SSR-safe media query hook. */
+/** Media query hook, initialised synchronously so the first render is correct. */
 export function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(() =>
     typeof window !== "undefined" ? window.matchMedia(query).matches : false,
@@ -66,47 +17,54 @@ export function useMediaQuery(query: string) {
   return matches;
 }
 
-/** Locks body scroll (used by the mobile menu drawer). */
-export function useBodyLock(locked: boolean) {
+/** Runs `measure` at most once per frame on scroll/resize (Lenis drives native scroll, so this stays in sync). */
+function useFrameThrottledScroll(measure: () => void, deps: unknown[]) {
   useEffect(() => {
-    if (!locked) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
+    let frame = 0;
+    const run = () => {
+      frame = 0;
+      measure();
     };
-  }, [locked]);
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(run);
+    };
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, deps);
 }
 
-/** Counts up to `target` once the element scrolls into view. */
-export function useCountUp(target: number, duration = 1400) {
-  const ref = useRef<HTMLSpanElement | null>(null);
-  const [value, setValue] = useState(0);
+/**
+ * Scroll-spy: returns the id of the section that currently crosses a line
+ * ~35% down the viewport. At the very bottom of the page the last section wins,
+ * so short final sections still get highlighted.
+ */
+export function useActiveSection<T extends string>(ids: readonly T[], lineRatio = 0.35): T {
+  const [active, setActive] = useState<T>(ids[0]);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (!("IntersectionObserver" in window)) {
-      setValue(target);
-      return;
+  useFrameThrottledScroll(() => {
+    const line = window.innerHeight * lineRatio;
+    let current = ids[0];
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= line) current = id;
     }
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting) return;
-        io.disconnect();
-        const start = performance.now();
-        const tick = (now: number) => {
-          const p = Math.min((now - start) / duration, 1);
-          setValue(Math.round(target * (1 - Math.pow(1 - p, 3))));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      },
-      { threshold: 0.4 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [target, duration]);
+    const doc = document.documentElement;
+    if (window.innerHeight + window.scrollY >= doc.scrollHeight - 2) current = ids[ids.length - 1];
+    setActive(current);
+  }, [ids, lineRatio]);
 
-  return { ref, value };
+  return active;
+}
+
+/** True once the page has scrolled past `threshold` pixels. */
+export function useScrolledPast(threshold: number) {
+  const [past, setPast] = useState(false);
+  useFrameThrottledScroll(() => setPast(window.scrollY > threshold), [threshold]);
+  return past;
 }
