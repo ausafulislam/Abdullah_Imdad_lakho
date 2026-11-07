@@ -1,7 +1,8 @@
 /**
  * Single source of truth for portfolio content and contact details.
  * Components only render what is defined here — keep it factual: no invented
- * experience, clients, projects or achievements.
+ * experience, clients or achievements. The projects (src/data/projects.ts) are
+ * real, working apps in this repository.
  */
 
 /* ------------------------------------------------------------------ */
@@ -35,18 +36,19 @@ export const MAILTO_URL = `mailto:${CONTACT.email}`;
 /* Navigation                                                          */
 /* ------------------------------------------------------------------ */
 
-export type SectionId = "top" | "about" | "work" | "experience" | "achievements" | "contact";
+export type SectionId = "top" | "about" | "work" | "projects" | "experience" | "achievements" | "contact";
 
 export const NAV_LINKS: { label: string; href: `#${SectionId}`; id: SectionId }[] = [
   { label: "Home", href: "#top", id: "top" },
   { label: "About", href: "#about", id: "about" },
   { label: "Work", href: "#work", id: "work" },
+  { label: "Projects", href: "#projects", id: "projects" },
   { label: "Experience", href: "#experience", id: "experience" },
   { label: "Contact", href: "#contact", id: "contact" },
 ];
 
 /** Sections that drive the active nav indicator, in page order. */
-export const SPY_SECTIONS: SectionId[] = ["top", "about", "work", "experience", "achievements", "contact"];
+export const SPY_SECTIONS: SectionId[] = ["top", "about", "work", "projects", "experience", "achievements", "contact"];
 
 /** Sections without their own nav item highlight the closest related one. */
 export const NAV_ALIAS: Partial<Record<SectionId, SectionId>> = {
@@ -74,12 +76,12 @@ export const ABOUT = {
   ],
 } as const;
 
-export type EducationIcon = "graduation" | "book" | "award" | "community";
+export type EducationIcon = "graduation" | "book" | "school" | "community";
 
 export const EDUCATION: { icon: EducationIcon; title: string; meta: string[] }[] = [
   { icon: "graduation", title: "BS Artificial Intelligence", meta: ["DUET, Karachi", "2026 – Present"] },
-  { icon: "book", title: "Intermediate", meta: ["D.J. Sindh Science College", "Completed"] },
-  { icon: "award", title: "S.S.C.-II", meta: ["Noor Eastern Collegiate", "2024"] },
+  { icon: "book", title: "HSC", meta: ["Completed from D.J. Sindh Science College"] },
+  { icon: "school", title: "SSC", meta: ["Completed from Noor Eastern Collegiate, Nawabshah"] },
   { icon: "community", title: "AI Community / AICP – DUET", meta: ["Interested in participation & coordination"] },
 ];
 
@@ -205,8 +207,8 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     id: "ssc-2024",
     icon: "result",
-    kicker: "Noor Eastern Collegiate, Nawabshah · 2024",
-    title: "S.S.C.-II Annual Examination 2024.",
-    detail: "Academic result: 884 out of 1100, Grade A1.",
+    kicker: "SSC · 2024",
+    title: "Secondary School Certificate (SSC).",
+    detail: "Completed from Noor Eastern Collegiate, Nawabshah.",
   },
 ];

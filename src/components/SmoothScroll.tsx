@@ -77,6 +77,9 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
       const lenis = lenisRef.current;
       if (lenis) {
+        // Instant jumps follow route changes: measure the new page first, or Lenis
+        // would clamp the target to the previous page's height.
+        if (immediate) lenis.resize();
         lenis.scrollTo(target, { duration: 1.15, easing: easeOutExpo, immediate, force: true });
         return;
       }
@@ -111,6 +114,29 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
   }, [scrollTo]);
+
+  // ---- Keep ScrollTrigger positions true when the page height changes -------
+  // ScrollTrigger re-measures on window resize, not when content grows or
+  // shrinks (a route change, tasks added in a project app, an error message).
+  // Stale start positions could leave a once-only reveal, such as the footer
+  // name, waiting below the end of the page.
+  useEffect(() => {
+    if (typeof ResizeObserver === "undefined") return;
+    let height = document.body.offsetHeight;
+    let timer = 0;
+    const observer = new ResizeObserver(() => {
+      const next = document.body.offsetHeight;
+      if (Math.abs(next - height) < 2) return;
+      height = next;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => ScrollTrigger.refresh(), 150);
+    });
+    observer.observe(document.body);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, []);
 
   // ---- Deep links (/#contact) and post-font-load refresh ----------------
   useEffect(() => {

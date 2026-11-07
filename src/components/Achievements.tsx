@@ -31,7 +31,7 @@ export default function Achievements() {
               <span className="eyebrow">Achievements</span>
             </span>
             <span className="sr-only">: </span>
-            Certifications and academic results.
+            Certificates and academic milestones.
           </h2>
         </div>
 

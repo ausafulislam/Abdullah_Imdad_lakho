@@ -33,6 +33,7 @@
 
   --color-ink: #111111; /* primary text */
   --color-muted: #767676; /* secondary text (#777 nudged to pass WCAG AA on white) */
+  --color-muted-strong: #6b6b6b; /* secondary text on mist / #fafafa surfaces (keeps AA there) */
   --color-faint: #8a8a8a; /* large display text only */
   --color-line: #eaeaea; /* borders & dividers */
   --color-mist: #f4f4f4; /* subtle surfaces */
@@ -167,6 +168,15 @@
     .t-display {
       font-size: clamp(4.1rem, 1.6rem + 3.9vw, 5.4rem);
     }
+  }
+
+  /* Page titles below the hero level (project pages, 404). */
+  .t-h1 {
+    font-size: clamp(2.25rem, 1.55rem + 2.6vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
   }
 
   .t-h2 {
@@ -335,5 +345,50 @@
 
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  /* ---- Round checkbox (project apps): 3:1 border, lime fill when checked ---- */
+  .check-round {
+    appearance: none;
+    display: inline-grid;
+    flex-shrink: 0;
+    width: 1.375rem;
+    height: 1.375rem;
+    margin: 0;
+    border: 1.5px solid #8f8f8f;
+    border-radius: 999px;
+    background-color: #fff;
+    cursor: pointer;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
+  }
+
+  .check-round:hover {
+    border-color: var(--color-ink);
+  }
+
+  .check-round:checked {
+    border-color: var(--color-ink);
+    background: var(--color-lime)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111111' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+      center / 0.8rem no-repeat;
+  }
+
+  .check-round:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* Modal entrance (shortened by the reduced-motion rule above). */
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

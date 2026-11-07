@@ -4,6 +4,7 @@ import { CONTACT, MAILTO_URL, NAV_LINKS, PROFILE } from "../data/portfolio";
 import { useScrolledPast } from "../hooks/usePortfolio";
 import { gsap, useGSAP, MOTION_OK } from "../lib/gsap";
 import { useSmoothScroll } from "./SmoothScroll";
+import { useRouter, useSectionHref } from "../lib/router";
 import { LinkedInIcon } from "./icons";
 import { cn } from "../utils/cn";
 
@@ -16,6 +17,8 @@ const SOCIALS = [
 export default function Footer() {
   const showBackToTop = useScrolledPast(700);
   const { scrollTo } = useSmoothScroll();
+  const { route } = useRouter();
+  const sectionHref = useSectionHref();
   const footerRef = useRef<HTMLElement>(null);
 
   // The oversized name rises out of the bottom edge once (it stays fully visible
@@ -40,7 +43,7 @@ export default function Footer() {
       <footer ref={footerRef} className="border-t border-line pb-[env(safe-area-inset-bottom,0px)]">
         <div className="shell pt-10 sm:pt-12">
           <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-            <a href="#top" className="flex w-fit items-center gap-4 rounded-md">
+            <a href={route.kind === "home" ? "#top" : "/"} className="flex w-fit items-center gap-4 rounded-md">
               <img src="/logo.svg" alt="" width={252} height={183} className="h-7 w-auto" />
               <span>
                 <span className="block text-base font-semibold tracking-[-0.015em]">{PROFILE.name}</span>
@@ -52,7 +55,10 @@ export default function Footer() {
               <ul className="flex flex-wrap gap-x-7 gap-y-2">
                 {NAV_LINKS.map((link) => (
                   <li key={link.id}>
-                    <a href={link.href} className="text-sm font-medium text-[#4d4d4d] transition-colors hover:text-ink">
+                    <a
+                      href={sectionHref(link.href)}
+                      className="text-sm font-medium text-[#4d4d4d] transition-colors hover:text-ink"
+                    >
                       {link.label}
                     </a>
                   </li>

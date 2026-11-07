@@ -24,14 +24,15 @@ personal portfolio website.
 
 ## Project overview
 
-A single-page portfolio that presents Abdullah's academic journey: who he is, his education, the
-areas he is interested in, the skills he is building, how he learns, his certificates and results,
-and how to get in touch.
+A portfolio website that presents Abdullah's academic journey: who he is, his education, the
+areas he is interested in, the skills he is building, three practice web projects, how he learns,
+his certificates, and how to get in touch. Each project is a working app on its own page.
 
-It is a fully static site. At build time React renders the page into **one self-contained
-`index.html`**, with all JavaScript and CSS inlined and the page content already in the HTML. It
-needs no server and runs on any static host. In the browser, React takes over that HTML
-(hydration), and GSAP adds subtle animations on top.
+It is a fully static site. At build time React renders every page into **its own self-contained
+HTML file** (`index.html` and `projects/<name>.html`), with all JavaScript and CSS inlined and the
+page content already in the HTML. The interactive apps start in the browser, because they work
+with the visitor's own saved data. It needs no server and runs on any static host. In the
+browser, React takes over that HTML (hydration), and GSAP adds subtle animations on top.
 
 ## About the portfolio owner
 
@@ -39,23 +40,25 @@ needs no server and runs on any static host. In the browser, React takes over th
 BS Artificial Intelligence student at Dawood University of Engineering and Technology (DUET),
 Karachi, Pakistan.
 
-- **Education:** BS Artificial Intelligence, DUET (2026 – present); Intermediate, D.J. Sindh
-  Science College (completed); S.S.C.-II, Noor Eastern Collegiate, Nawabshah (2024)
+- **Education:** BS Artificial Intelligence, DUET (2026 – present); HSC, completed from D.J. Sindh
+  Science College; SSC, completed from Noor Eastern Collegiate, Nawabshah
 - **Interests:** artificial intelligence, software development, programming, machine learning,
   data and analytics, technology
 - **Currently learning:** C programming, AI fundamentals, maths for computing, data-analysis
   fundamentals and Microsoft Office tools
 - **Achievements:** Certificate of Participation, 15th Maarif Inter-School Maths Olympiad (2019);
-  Certificate of Participation, ICATS English Linguistics Contest 2020; S.S.C.-II Annual
-  Examination 2024, 884/1100, Grade A1
+  Certificate of Participation, ICATS English Linguistics Contest 2020; Secondary School
+  Certificate (SSC), 2024
+- **Projects:** three practice web apps (see [Projects](#projects))
 - **Open to** internships and collaboration
 
-All of this content lives in `src/data/portfolio.ts`.
+This content lives in `src/data/portfolio.ts`; the project texts live in `src/data/projects.ts`.
 
 ## Features
 
 - **Sections:** Hero, About (with an education timeline), Areas of Interest and Skills in
-  Progress, How I Learn, Achievements, Contact, and Footer.
+  Progress, Projects, How I Learn, Achievements, Contact, and Footer.
+- **Three working projects,** each on its own page (see [Projects](#projects)).
 - **Pre-rendered HTML.** The full page content is in the HTML file, so it is readable without
   JavaScript (search engines, link previews, assistive technology, slow devices).
 - **Animated hero statistics.** The numbers count up from 0 to 6+, 18+ and 3+ when they come into
@@ -70,8 +73,10 @@ All of this content lives in `src/data/portfolio.ts`.
   `prefers-reduced-motion`.
 - **Resilient:** an error boundary shows a recovery screen instead of a blank page, and unknown
   URLs get a branded `404.html`.
-- **Private by default:** no analytics, cookies, trackers or third-party requests. The font is
-  self-hosted.
+- **Private by default:** no analytics, cookies or trackers, and the font is self-hosted. The
+  portfolio itself makes no third-party requests. Two project pages call public APIs straight from
+  the browser: the Expense Tracker's currency converter (Frankfurter) and the Weather Dashboard
+  (Open-Meteo, only after you search for a place).
 
 ### Contact form
 
@@ -80,6 +85,78 @@ The form has **no backend**. Submitting it composes the enquiry and opens
 nothing itself. The confirmation panel also offers copy-to-clipboard and `mailto:` fallbacks in
 case the tab is blocked or WhatsApp is missing. To use a form service instead, replace
 `handleSubmit` in `src/components/Contact.tsx`.
+
+## Projects
+
+Three practice apps built with React and TypeScript inside this codebase. Each page has a short
+introduction, the working app, its features, the technologies used and links back to the
+portfolio. None of them needs an account, a server or an API key, and none of them ships with
+sample data: everything shown comes from the visitor's own entries or from a live API response.
+
+| Project | Page | Data |
+| --- | --- | --- |
+| Personal Task Manager | [`/projects/task-manager`](https://abdullah-imdad-lakho.vercel.app/projects/task-manager) | Browser only (`localStorage`) |
+| Expense Tracker | [`/projects/expense-tracker`](https://abdullah-imdad-lakho.vercel.app/projects/expense-tracker) | Browser only (`localStorage`), plus optional live exchange rates |
+| Weather Dashboard | [`/projects/weather-dashboard`](https://abdullah-imdad-lakho.vercel.app/projects/weather-dashboard) | Live from the Open-Meteo APIs |
+
+**Personal Task Manager** (`src/projects/task-manager/`)
+
+- Add, edit and delete tasks with a title, an optional description, a priority (Low, Medium or
+  High) and an optional due date. The form validates its fields.
+- Mark tasks as completed or pending. Overdue and due-today tasks are highlighted.
+- Filter by All, Pending or Completed, search by title, and sort.
+- The totals and the progress bar are calculated from the saved tasks.
+- Saved in `localStorage` and kept in sync across open tabs. Unreadable saved data is ignored
+  instead of breaking the app.
+
+**Expense Tracker** (`src/projects/expense-tracker/`)
+
+- Add, edit and delete income and expense entries with an amount, a description, a category and a
+  date. Expense categories: Food, Education, Shopping, Transport and Others. Income categories:
+  Allowance, Scholarship, Part-time job, Gift and Others.
+- Total income, total expenses and balance, and a history you can filter by type, category and
+  date range.
+- A monthly summary with a month picker, spending by category, and an income-against-expenses
+  chart for six months. The charts are hand-written SVG, each with a data table for screen
+  readers.
+- Amounts are stored as whole paisa, so totals have no floating-point rounding errors.
+- Optional currency conversion of the totals with live rates from Frankfurter, cached for six
+  hours in the browser session. If the service can't be reached, only the converter shows an
+  error; the tracker keeps working.
+
+**Weather Dashboard** (`src/projects/weather/`)
+
+- Search for a city (at least two characters). Matching places are listed with their region and
+  country so you can pick the right one, and quick picks cover a few cities.
+- Current temperature, feels-like, humidity, wind, precipitation and a day or night condition
+  icon; hourly temperatures for the next 24 hours; a 7-day forecast with highs, lows and the
+  chance of precipitation; sunrise and sunset in the place's local time.
+- A new search replaces everything. Outdated requests are cancelled, and requests time out after
+  12 seconds.
+- Loading, error, no-results and timeout states. When a request fails, no weather values are
+  shown: nothing is cached, estimated or made up.
+- The last five places are remembered in `localStorage` for quick access.
+
+### APIs used
+
+| API | Used by | Documentation | Key | Notes |
+| --- | --- | --- | --- | --- |
+| Open-Meteo Geocoding API | Weather Dashboard (city search) | [open-meteo.com/en/docs/geocoding-api](https://open-meteo.com/en/docs/geocoding-api) | None | Location data based on GeoNames |
+| Open-Meteo Forecast API | Weather Dashboard (weather) | [open-meteo.com/en/docs](https://open-meteo.com/en/docs) | None | Free for non-commercial use within its daily limits; data under CC BY 4.0, credited on the page |
+| Frankfurter | Expense Tracker (currency converter) | [frankfurter.dev/docs](https://frankfurter.dev/docs/) | None | Free and open source; caching is encouraged |
+
+Open-Meteo's free tier is for non-commercial use. A commercial version of the site would need one
+of its paid plans.
+
+### Routing
+
+- A small router in `src/lib/router.tsx` (History API, no extra dependency) handles `/`, the
+  three `/projects/<name>` pages and a not-found page. On each navigation it updates the title,
+  description, canonical URL and social tags.
+- Every route is pre-rendered at build time, so opening or reloading a project URL directly serves
+  complete HTML.
+- Links back to `/#projects` land on the Projects section, and the browser's Back button restores
+  the previous scroll position.
 
 ## Technologies used
 
@@ -93,6 +170,9 @@ case the tab is blocked or WhatsApp is missing. To use a form service instead, r
 | Smooth scrolling | [Lenis](https://github.com/darkroomengineering/lenis) 1.3.27 |
 | Icons | [lucide-react](https://lucide.dev) 1.44.0 |
 | Class names | `clsx` + `tailwind-merge`, combined in `src/utils/cn.ts` |
+| Routing | A small History API router in `src/lib/router.tsx` (no router dependency) |
+| Charts | Hand-written SVG (no chart library) |
+| Data APIs | [Open-Meteo](https://open-meteo.com/) (weather) and [Frankfurter](https://frankfurter.dev/) (exchange rates), both without keys |
 | Font | Plus Jakarta Sans (variable, self-hosted, SIL OFL 1.1) |
 | Hosting | [Vercel](https://vercel.com) |
 
@@ -112,8 +192,9 @@ Defined in `@theme` at the top of `src/index.css`. Minimal and monochrome, with 
 ## Project structure
 
 ```
-index.html                 # <head>: SEO meta, Open Graph, icons, JSON-LD, preloads, intro guard
-vite.config.ts             # Vite config + the build-time pre-render plugin
+index.html                 # home <head>: SEO meta, Open Graph, icons, JSON-LD, preloads, intro guard
+vite.config.ts             # Vite config + the build-time pre-render plugin (every route)
+vercel.json                # clean URLs (/projects/x serves projects/x.html), no trailing slash
 public/                    # copied to dist/ as is
   logo.svg                 # official logo (vector)
   favicon.ico favicon.svg apple-touch-icon.png
@@ -125,15 +206,27 @@ public/                    # copied to dist/ as is
   images/                  # photos, hero portrait, social card (see below)
 src/
   main.tsx                 # browser entry: hydrates the pre-rendered HTML
-  entry-server.tsx         # build-time entry: renders <App /> to HTML
-  App.tsx                  # section order, skip link, smooth-scroll provider
+  entry-server.tsx         # build-time entry: renders each route to HTML
+  App.tsx                  # skip link, smooth-scroll provider, navbar, current page, footer
   index.css                # Tailwind import, @theme tokens, component classes
   data/portfolio.ts        # all portfolio content (edit this first)
+  data/projects.ts         # project names, descriptions, features, technologies and APIs
+  data/routes.ts           # site URL, route matching, per-page title and description
+  data/pageHead.ts         # build-time <head> and JSON-LD for the project pages
   lib/gsap.ts              # GSAP + ScrollTrigger setup and shared reveal presets
+  lib/router.tsx           # small History API router
+  lib/storage.ts           # validated localStorage state with cross-tab sync
+  lib/dates.ts             # local-date helpers
   hooks/usePortfolio.ts    # useMediaQuery, useScrolledPast
   utils/cn.ts              # class-name helper
-  components/              # Navbar Hero About Work Process Achievements Contact Footer
-                           # SmoothScroll ErrorBoundary icons
+  pages/                   # Home, ProjectPage, NotFound
+  components/              # Navbar Hero About Work Projects Process Achievements Contact Footer
+                           # ProjectPreviews RouteScroll ClientOnly SmoothScroll ErrorBoundary icons
+  projects/
+    shared/                # form controls, panels, stat cards and the dialog used by the apps
+    task-manager/          # Personal Task Manager
+    expense-tracker/       # Expense Tracker, SVG charts, currency converter
+    weather/               # Weather Dashboard, Open-Meteo client, weather codes
 ```
 
 | Image | Used for |
@@ -149,10 +242,13 @@ src/
 | To change | Edit |
 | --- | --- |
 | Any profile, section or contact content | `src/data/portfolio.ts` |
+| Project cards and project page texts | `src/data/projects.ts` |
+| The apps themselves | `src/projects/` |
 | Section headings | the section's component in `src/components/` |
 | Colours, type, buttons | `@theme` and component classes in `src/index.css` |
 | Animation presets | `src/lib/gsap.ts`, plus each section's `useGSAP` block |
-| Page title, description, structured data | `index.html` |
+| Home page title, description, structured data | `index.html` (keep `HOME_META` in `src/data/routes.ts` in step) |
+| Project page titles and descriptions; their structured data | `seo` in `src/data/projects.ts`; `src/data/pageHead.ts` |
 
 ## Getting started
 
@@ -202,22 +298,26 @@ What `npm run build` does:
 
 1. **Bundles the app.** `vite-plugin-singlefile` inlines all JavaScript and CSS into
    `dist/index.html`, and files from `public/` are copied alongside it.
-2. **Pre-renders the page.** The `portfolio:prerender` plugin in `vite.config.ts` builds
-   `src/entry-server.tsx` for Node, renders `<App />` to HTML and writes it into
-   `<div id="root">` in `dist/index.html`. It then deletes its temporary `dist-ssr/` folder. If
-   this step fails, the whole build fails, so a page without content is never deployed. No
-   extra dependency is involved.
+2. **Pre-renders every route.** The `portfolio:prerender` plugin in `vite.config.ts` builds
+   `src/entry-server.tsx` for Node and renders each route (`/` and the three project pages) to
+   HTML inside `<div id="root">`. The home page keeps the `<head>` from `index.html`; each project
+   page gets its own title, description, canonical URL, social tags and JSON-LD and is written to
+   `dist/projects/<name>.html`. The plugin then deletes its temporary `dist-ssr/` folder. If this
+   step fails, the whole build fails, so a page without content is never deployed. No extra
+   dependency is involved.
 3. **Hydrates in the browser.** `src/main.tsx` attaches React to the existing markup with
-   `hydrateRoot` instead of rendering it again.
+   `hydrateRoot` when the pre-rendered page matches the URL, and renders from scratch otherwise.
 
-The output is `dist/index.html` (about 488 kB, or 151 kB gzipped, including the pre-rendered
-markup) plus the public assets. Components must stay safe to render on the server: browser-only
+The output is `dist/index.html` (about 657 kB, or 195 kB gzipped, including the pre-rendered
+markup), one file per project page (about 610 kB, or 186 kB gzipped, each) and the public assets.
+Every file is self-contained, so each page carries the code for the whole site. Components must stay safe to render on the server: browser-only
 code (`window`, `document`, GSAP, Lenis) belongs in `useGSAP` or `useEffect`, never in the render
 body.
 
 ## Environment variables
 
-None. The site has no API keys or secrets and no `.env` file. The code only reads Vite's
+None. The site has no API keys or secrets and no `.env` file, and the public APIs used by the
+projects (Open-Meteo and Frankfurter) need no key. The code only reads Vite's
 built-in `import.meta.env.DEV` flag, which exposes GSAP in the browser console during
 development.
 
@@ -229,10 +329,10 @@ The setup follows Google's [Search Essentials](https://developers.google.com/sea
 
 | What | Where |
 | --- | --- |
-| Title, meta description, self-referencing canonical, robots directives, `lang` | `index.html` |
+| Title, meta description, self-referencing canonical, robots directives, `lang` | `index.html` (home); `src/data/projects.ts` and `src/data/pageHead.ts` (project pages) |
 | Open Graph and Twitter/X card with a 1200×630 image | `index.html`, `public/images/og-image.png` |
 | Favicons and web app manifest, generated from the official logo | `public/favicon.*`, `apple-touch-icon.png`, `icon-*.png`, `site.webmanifest` |
-| Structured data (JSON-LD) | `index.html` |
+| Structured data (JSON-LD) | `index.html` (home); `src/data/pageHead.ts` (project pages) |
 | Crawl rules and sitemap | `public/robots.txt`, `public/sitemap.xml` |
 | Pre-rendered content | `vite.config.ts`, `src/entry-server.tsx` |
 
@@ -240,7 +340,8 @@ The setup follows Google's [Search Essentials](https://developers.google.com/sea
   alt text arrive in the first HTML response. Google can render JavaScript, but pre-rendering is
   faster for visitors and works for every crawler, including link-preview bots that don't run
   scripts.
-- **Descriptive headings.** One `<h1>` (his name), one `<h2>` per section and `<h3>`/`<h4>` for
+- **Descriptive headings.** One `<h1>` per page (his name on the home page, the project name on a
+  project page), one `<h2>` per section and `<h3>`/`<h4>` for
   items. Each section heading includes its label, for example "About Me: Building a strong
   foundation, one concept at a time."
 - **Structured data.** A single `@graph` with `WebSite`, `ProfilePage` (Google's markup for a
@@ -248,10 +349,11 @@ The setup follows Google's [Search Essentials](https://developers.google.com/sea
   alternate names, photo, LinkedIn, email, phone, city, his DUET affiliation, previous schools
   and the topics he is learning. DUET is identified by its official website and Wikipedia
   article. The markup describes only what the page shows. Valid markup makes a page *eligible*
-  for rich results; Google decides whether to show them.
+  for rich results; Google decides whether to show them. Each project page has its own graph:
+  `WebPage`, `WebSite`, `Person` and a `BreadcrumbList` (Home, then the project).
 - **Crawl rules.** `robots.txt` lets every crawler access everything, including CSS, JavaScript
-  and images, and points to the sitemap. The sitemap lists the one real URL and the date it last
-  changed.
+  and images, and points to the sitemap. The sitemap lists the four real URLs (the home page and
+  the three project pages) and the date each last changed.
 - **What is deliberately absent:** a `keywords` meta tag (Google ignores it), hidden text, and
   keyword repetition. Names and keywords appear only where they read naturally.
 - The title (73 characters) and description (185 characters) are longer than Google typically
@@ -264,8 +366,8 @@ The setup follows Google's [Search Essentials](https://developers.google.com/sea
 - When `og-image.png` changes, bump the `?v=` query on `og:image` and `twitter:image`. LinkedIn,
   WhatsApp and Facebook cache preview images for a long time.
 - If the domain ever changes, update the canonical, `og:url`, `og:image`, `twitter:image` and
-  every JSON-LD URL in `index.html`, the `Sitemap:` line in `robots.txt`, the `<loc>` in
-  `sitemap.xml`, and the URLs in both llms files.
+  every JSON-LD URL in `index.html`, `SITE_URL` in `src/data/routes.ts`, the `Sitemap:` line in
+  `robots.txt`, the `<loc>` entries in `sitemap.xml`, and the URLs in both llms files.
 
 **After deploying (owner steps)**
 
@@ -304,9 +406,10 @@ markup or file to add. The work here is therefore about clarity and consistency.
 - **No FAQ block.** Every answer it would give (who he is, what and where he studies, his
   interests, his availability) is already stated in the visible sections. Repeating them would
   add text only for search engines.
-- **Honesty guardrails.** There are no invented roles, projects or awards. The olympiad and
-  contest certificates are labelled as participation, and the llms files ask AI tools not to
-  present him as a professional.
+- **Honesty guardrails.** There are no invented roles, clients or awards. The three projects are
+  real, working code in this repository, presented as practice projects with no claims of users
+  or results. The olympiad and contest certificates are labelled as participation, and the llms
+  files ask AI tools not to present him as a professional.
 
 To see how the site appears in Google's AI features, use Search Console's
 [Generative AI performance report](https://support.google.com/webmasters/answer/16984139).
@@ -328,6 +431,9 @@ To see how the site appears in Google's AI features, use Search Console's
   the stats *and* they are in view (ScrollTrigger, `once: true`). If the visitor scrolls past
   without seeing them, they still finish, so they never stay at 0. Cleanup restores the final
   values.
+- **Projects.** On the home page the heading reveals and the three cards use the shared batch
+  helper. On a project page the introduction and the app fade up once on arrival, and the
+  details below reveal on scroll. Inside the apps, motion is limited to short CSS transitions.
 - **Footer wordmark.** "Abdullah" rises slightly (`yPercent: 28` → 0) and fades in once, when it
   enters the viewport.
 - **No flash on load.** Pre-rendered content would otherwise be visible for a moment before
@@ -366,19 +472,24 @@ To see how the site appears in Google's AI features, use Search Console's
   On tablet and desktop the hero portrait (640/960 px) is preloaded with high priority. On phones
   the About photo is the first image on screen, so it is not lazy-loaded. Every image declares
   its width and height, so the layout doesn't shift.
-- Tested at 360, 390, 480, 768, 1024, 1280, 1440 and 1920 px wide, with and without reduced
-  motion.
+- **The apps on phones.** Stat cards and summaries adapt to their own width with container
+  queries, the expense chart redraws at its real width so its labels stay readable, and dialogs
+  fit small screens.
+- The home page was tested at 360, 390, 480, 768, 1024, 1280, 1440 and 1920 px wide, with and
+  without reduced motion, and the project pages at 360, 390, 768, 1024 and 1440 px.
 
 ## Deployment
 
 The production site is <https://abdullah-imdad-lakho.vercel.app/>, hosted on Vercel.
 
 - Vercel detects Vite automatically: the build command is `npm run build` and the output
-  directory is `dist`. Pre-rendering is part of `vite build`, so no extra configuration or
-  `vercel.json` is needed.
+  directory is `dist`. Pre-rendering is part of `vite build`.
+- `vercel.json` sets `cleanUrls: true`, so `/projects/task-manager` serves
+  `projects/task-manager.html`, and `trailingSlash: false`, so each page has one URL.
 - Use Node.js 20.x or 22.x in the project settings (Vite needs 20.19+ or 22.12+).
 - Vercel serves `dist/404.html` for unknown URLs.
-- Any other static host works too: run `npm run build` and upload the `dist/` folder.
+- Any other static host works too: run `npm run build` and upload the `dist/` folder. The host
+  must serve `projects/<name>.html` for `/projects/<name>` (often called clean URLs).
 
 ## Contact and social links
 

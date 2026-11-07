@@ -1,12 +1,12 @@
 import { useRef } from "react";
-import { ArrowUpRight, BookOpen, GraduationCap, Trophy, Users, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, BookOpen, GraduationCap, School, Users, type LucideIcon } from "lucide-react";
 import { ABOUT, CONTACT, EDUCATION, type EducationIcon } from "../data/portfolio";
 import { gsap, useGSAP, MOTION_OK, REVEAL, REVEAL_START } from "../lib/gsap";
 
 const ICONS: Record<EducationIcon, LucideIcon> = {
   graduation: GraduationCap,
   book: BookOpen,
-  award: Trophy,
+  school: School,
   community: Users,
 };
 
