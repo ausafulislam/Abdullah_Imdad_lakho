@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- head:meta:start -->
     <title>Abdullah Imdad Lakho | BS Artificial Intelligence Student at DUET Karachi</title>
     <meta
       name="description"
@@ -44,6 +45,7 @@
     />
     <meta name="twitter:image" content="https://abdullah-imdad-lakho.vercel.app/images/og-image.png?v=4" />
     <meta name="twitter:image:alt" content="Abdullah Imdad Lakho, BS Artificial Intelligence student at DUET Karachi" />
+    <!-- head:meta:end -->
 
     <!-- Icons (official logo), manifest and theme colour -->
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
@@ -56,12 +58,12 @@
     <!-- Google Search Console Site Verification Code -->
     <meta name="google-site-verification" content="W7P03anI1peqm1HTuga88Nn6q9EzFWaDr1Cxxar7wy8" />
 
-
     <!-- Plain-text summary of this site for AI assistants (https://llmstxt.org). -->
     <link rel="describedby" href="/llms.txt" />
 
     <!-- Critical font: self-hosted variable Plus Jakarta Sans (one file, all weights). -->
     <link rel="preload" href="/fonts/plus-jakarta-sans-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- head:preload:start -->
     <!-- Hero portrait (LCP on tablet/desktop). Mirrors the <picture> in Hero.tsx;
          media-gated because phones get a text-only hero and never load it. -->
     <link
@@ -74,6 +76,7 @@
       media="(min-width: 48rem)"
       fetchpriority="high"
     />
+    <!-- head:preload:end -->
 
     <!-- The page HTML is pre-rendered at build time. For visitors who allow motion,
          keep it hidden until GSAP has set the intro's start states (App.tsx removes
@@ -83,6 +86,7 @@
         document.documentElement.classList.add("intro-pending");
     </script>
 
+    <!-- head:jsonld:start -->
     <!-- Structured data: describes visible, verifiable content only (who he is, his
          university, schools and the topics in the Skills section). It helps search
          engines understand the page; it does not guarantee any rich result.
@@ -170,6 +174,7 @@
         ]
       }
     </script>
+    <!-- head:jsonld:end -->
   </head>
   <body>
     <div id="root"></div>

@@ -1,15 +1,16 @@
 import { useLayoutEffect } from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Work from "./components/Work";
-import Process from "./components/Process";
-import Achievements from "./components/Achievements";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import RouteScroll from "./components/RouteScroll";
 import { SmoothScrollProvider } from "./components/SmoothScroll";
+import { useRouter } from "./lib/router";
+import Home from "./pages/Home";
+import ProjectPage from "./pages/ProjectPage";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
+  const { route } = useRouter();
+
   // index.html hides the pre-rendered page for motion users until GSAP has set
   // its start states. Layout effects run child-first, so by now every section's
   // useGSAP has run: reveal in the same frame, with no flash of final positions.
@@ -27,14 +28,16 @@ export default function App() {
       </a>
       <Navbar />
       <main id="main" tabIndex={-1}>
-        <Hero />
-        <About />
-        <Work />
-        <Process />
-        <Achievements />
-        <Contact />
+        {route.kind === "home" ? (
+          <Home />
+        ) : route.kind === "project" ? (
+          <ProjectPage key={route.project.id} project={route.project} />
+        ) : (
+          <NotFound />
+        )}
       </main>
       <Footer />
+      <RouteScroll />
     </SmoothScrollProvider>
   );
 }

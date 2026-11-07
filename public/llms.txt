@@ -1,6 +1,6 @@
 # Abdullah Imdad Lakho
 
-> Portfolio of Abdullah Imdad Lakho, a first-semester BS Artificial Intelligence student at Dawood University of Engineering and Technology (DUET) in Karachi, Pakistan. It covers his education, areas of interest, skills in progress, learning approach, academic achievements and contact details. He is open to internships and collaboration.
+> Portfolio of Abdullah Imdad Lakho, a first-semester BS Artificial Intelligence student at Dawood University of Engineering and Technology (DUET) in Karachi, Pakistan. It covers his education, areas of interest, skills in progress, three practice web projects, his learning approach, certificates and contact details. He is open to internships and collaboration.
 
 Key facts, as shown on the site:
 
@@ -8,25 +8,33 @@ Key facts, as shown on the site:
 - Academic identity: BS Artificial Intelligence student, first semester, 2026 – present
 - University: Dawood University of Engineering and Technology (DUET), Karachi
 - Location: Karachi, Sindh, Pakistan
-- Earlier education: Intermediate at D.J. Sindh Science College (completed); S.S.C.-II at Noor Eastern Collegiate, Nawabshah (2024)
+- Earlier education: HSC, completed from D.J. Sindh Science College; SSC, completed from Noor Eastern Collegiate, Nawabshah (2024)
 - Areas of interest: Artificial Intelligence, Software Development, Programming, Machine Learning, Data & Analytics, Technology
 - Skills in progress: C programming (variables, loops, conditionals, functions, problem-solving logic); AI fundamentals and intelligent systems; maths for computing; data-analysis fundamentals; Microsoft Word, Excel and PowerPoint; analytical thinking, logical reasoning, decision-making, communication, teamwork, adaptability and time management
-- Achievements: Certificate of Participation, 15th Maarif Inter-School Maths Olympiad (MISMO), November 2019; Certificate of Participation, ICATS English Linguistics Contest 2020; S.S.C.-II Annual Examination 2024, 884 out of 1100, Grade A1
+- Achievements: Certificate of Participation, 15th Maarif Inter-School Maths Olympiad (MISMO), November 2019; Certificate of Participation, ICATS English Linguistics Contest 2020; Secondary School Certificate (SSC), 2024, completed from Noor Eastern Collegiate, Nawabshah
+- Projects: three practice web apps built with React and TypeScript, each on its own page: a Personal Task Manager, an Expense Tracker and a Weather Dashboard
 - Community: interested in taking part in and helping coordinate the AI Community (AICP) at DUET
 - Availability: open to internships and collaboration
 
 Contact: email abdullah17.imdad@gmail.com; phone and WhatsApp 0303-3313312 (+92 303 3313312); LinkedIn https://www.linkedin.com/in/abdullah-imdad-lakho-150347364/
 
-Accuracy notes: he is at the start of his degree. He has no professional work experience and does not claim professional expertise. The skills listed are subjects he is currently learning, and the areas of interest are study topics, not completed projects. The MISMO and ICATS entries are certificates of participation, not awards or rankings.
+Accuracy notes: he is at the start of his degree. He has no professional work experience and does not claim professional expertise. The skills listed are subjects he is currently learning, and the areas of interest are study topics, not completed projects. The three projects are practice apps that run in the browser; the site claims no users, clients or results for them. The MISMO and ICATS entries are certificates of participation, not awards or rankings.
 
 ## Site sections
 
 - [Home](https://abdullah-imdad-lakho.vercel.app/#top): Name, degree, university, availability and headline numbers (6+ areas of focus, 18+ skills in progress, 3+ academic certificates)
 - [About](https://abdullah-imdad-lakho.vercel.app/#about): Short biography and education timeline
 - [Areas of Interest and Skills](https://abdullah-imdad-lakho.vercel.app/#work): Six areas of interest and four groups of skills in progress
+- [Projects](https://abdullah-imdad-lakho.vercel.app/#projects): Three practice web apps, each with its own page
 - [How I Learn](https://abdullah-imdad-lakho.vercel.app/#experience): His four-step learning cycle: Learn, Build, Improve, Repeat
-- [Achievements](https://abdullah-imdad-lakho.vercel.app/#achievements): Certificates and academic results
+- [Achievements](https://abdullah-imdad-lakho.vercel.app/#achievements): Certificates and academic milestones
 - [Contact](https://abdullah-imdad-lakho.vercel.app/#contact): Email, phone, LinkedIn and a message form that opens WhatsApp
+
+## Projects
+
+- [Personal Task Manager](https://abdullah-imdad-lakho.vercel.app/projects/task-manager): A to-do app with priorities, due dates, search, filters and a progress indicator. Tasks are saved in the visitor's browser (localStorage)
+- [Expense Tracker](https://abdullah-imdad-lakho.vercel.app/projects/expense-tracker): Records income and expenses by category and date, with totals, a monthly summary and charts calculated from the visitor's own entries. Optional currency conversion uses live rates from the Frankfurter API
+- [Weather Dashboard](https://abdullah-imdad-lakho.vercel.app/projects/weather-dashboard): City search with current conditions, hourly temperatures and a 7-day forecast, requested live from the Open-Meteo API
 
 ## Profiles
 

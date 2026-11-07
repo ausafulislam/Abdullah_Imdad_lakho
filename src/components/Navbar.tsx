@@ -4,13 +4,17 @@ import { useActiveSection, useScrolledPast } from "../hooks/usePortfolio";
 import { CONTACT, NAV_ALIAS, NAV_LINKS, SPY_SECTIONS } from "../data/portfolio";
 import { gsap, useGSAP, MOTION_OK } from "../lib/gsap";
 import { useSmoothScroll } from "./SmoothScroll";
+import { useRouter, useSectionHref } from "../lib/router";
 import { cn } from "../utils/cn";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const scrolled = useScrolledPast(8);
   const spied = useActiveSection(SPY_SECTIONS);
-  const active = NAV_ALIAS[spied] ?? spied;
+  const { route } = useRouter();
+  const sectionHref = useSectionHref();
+  // Home page: the section in view. Project pages: "Projects".
+  const active = route.kind === "home" ? (NAV_ALIAS[spied] ?? spied) : route.kind === "project" ? "projects" : null;
   const { setLocked } = useSmoothScroll();
 
   const navRef = useRef<HTMLElement>(null);
@@ -35,6 +39,7 @@ export default function Navbar() {
 
   useLayoutEffect(() => {
     const update = () => {
+      if (!active) return setIndicator(null);
       const link = listRef.current?.querySelector<HTMLElement>(`[data-nav-id="${active}"]`);
       if (!link || link.offsetWidth === 0) return; // hidden on mobile
       setIndicator({ x: link.offsetLeft, w: link.offsetWidth });
@@ -91,7 +96,7 @@ export default function Navbar() {
         aria-label="Primary"
         className="shell grid h-[var(--header-h)] grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]"
       >
-        <a href="#top" className="-m-2 inline-flex w-fit items-center rounded-md p-2">
+        <a href={route.kind === "home" ? "#top" : "/"} className="-m-2 inline-flex w-fit items-center rounded-md p-2">
           <img
             src="/logo.svg"
             alt="Abdullah Imdad Lakho, home"
@@ -108,7 +113,7 @@ export default function Navbar() {
             return (
               <li key={link.id}>
                 <a
-                  href={link.href}
+                  href={sectionHref(link.href)}
                   data-nav-id={link.id}
                   aria-current={isActive ? "location" : undefined}
                   className={cn(
@@ -134,7 +139,7 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center justify-end gap-2">
-          <a href="#contact" onClick={close} className="btn btn-dark btn-sm">
+          <a href={sectionHref("#contact")} onClick={close} className="btn btn-dark btn-sm">
             Let&apos;s Talk
             <ArrowRight className="btn-arrow h-4 w-4" aria-hidden="true" />
           </a>
@@ -180,7 +185,7 @@ export default function Navbar() {
                 <li key={link.id} className="border-b border-line">
                   <a
                     ref={i === 0 ? firstMobileLinkRef : undefined}
-                    href={link.href}
+                    href={sectionHref(link.href)}
                     onClick={close}
                     aria-current={isActive ? "location" : undefined}
                     className="flex items-center justify-between py-3.5 text-base font-semibold text-ink"
